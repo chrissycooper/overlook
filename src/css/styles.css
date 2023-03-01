@@ -1,3 +1,51 @@
-body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+
+* {
+  font-family:'Raleway';
 }
+
+body {
+  background: #CDEEF4;
+  /* background: linear-gradient(0deg, rgba(129,214,227,1) 0%, rgba(3,1,44,1) 100%); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+}
+
+.logo {
+  color: white;
+	font-size: 47px;
+	font-family: sans-serif;
+  z-index: 1;
+  position: absolute;
+  -webkit-text-stroke: 2px #E21F03;
+  position: absolute;
+  text-shadow: 0px 4px 8px darkblue;
+  margin-left: 25px;
+  font-kerning: none;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard {
+  width: 200px;
+  height: 200px;
+  /* background: #FFE3E3; */
+  background: white;
+  /* opacity: 80%; */
+  margin: 25px;
+  border-radius: 15px;
+}
+
+h2 {
+  color: #03012C;
+  opacity: 100%;
+}
+
+
+
+
