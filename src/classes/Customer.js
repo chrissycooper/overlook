@@ -4,6 +4,11 @@ class Customer {
         this.name = customer.name;
         this.bookings = []
     }
+
+    bookRoom(room, date) {
+        // let newbooking = new 
+        // this.bookings.push();
+    }
 }
 
 export default Customer;
