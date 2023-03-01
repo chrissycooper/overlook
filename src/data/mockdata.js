@@ -8,7 +8,6 @@ const customers = [
     {id: 13, name: "Christina Kulas"},
     {id: 20, name: "Keon Kirlin"},
     {id: 43, name: "Earline Hamill"},
-
 ];
 
 const rooms = [
