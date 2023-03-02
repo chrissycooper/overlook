@@ -23,8 +23,8 @@ describe('Booking', () => {
     room15 = new Room(rooms[6]);
     room12 = new Room(rooms[5]);
 
-    booking1 = new Booking(user9, bData1.date, room15, bData1.id);
-    booking2 = new Booking(user1, bData2.date, room12, bData2.id);
+    booking1 = new Booking(user9.id, bData1.date, room15, bData1.id);
+    booking2 = new Booking(user1.id, bData2.date, room12, bData2.id);
   })
   
   it('should have a customer', () => {
@@ -45,5 +45,10 @@ describe('Booking', () => {
   it('should have an id', () => {
     expect(booking1.id).to.equal("5fwrgu4i7k55hl6sz");
     expect(booking2.id).to.equal("5fwrgu4i7k55hl6t8");
+  });
+
+  it('should have a cost per night based on the room', () => {
+    expect(booking1.costPerNight).to.equal(294.56);
+    expect(booking2.costPerNight).to.equal(172.09);
   });
 });

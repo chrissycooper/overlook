@@ -3,6 +3,7 @@ const expect = chai.expect;
 import Customer from '../src/classes/Customer';
 import { customers, rooms, bookings} from '../src/data/mockdata';
 import Room from '../src/classes/Room';
+import Booking from '../src/classes/Booking';
 
 
 describe('Customer', () => {
@@ -38,6 +39,23 @@ describe('Customer', () => {
 	})
 	
 	it('should be able to parse bookings data', () => {
-		customer1.createBookingArray(bookings);
+		customer1.createBookingArray(bookings, rooms);
+    expect(customer1.bookings[0].id).to.equal("5fwrgu4i7k55hl6t8");
+    expect(customer1.bookings[0]).to.be.an.instanceOf(Booking);
+    expect(customer1.bookings[0].roomNumber).to.equal(12);
+    expect(customer1.bookings[0].userID).to.equal(1);
+    expect(customer1.bookings[0].date).to.equal("2022/02/05");
+
 	})
+	
+  it('should be able to calculate total amount spent', () => {
+		customer1.createBookingArray(bookings, rooms);
+    customer1.bookRoom(room1, "2024/04/22");
+    const totalSpent = customer1.calculateTotalSpent();
+    expect(totalSpent).to.equal(530.49);
+
+
+	})
+
+
 });
