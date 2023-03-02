@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Booking from '../src/classes/Booking';
-import mockdata from '../src/data/mockdata';
+import { customers, rooms, bookings } from '../src/data/mockdata';
 import Customer from '../src/classes/Customer';
 import Room from '../src/classes/Room';
 
@@ -14,14 +14,14 @@ describe('Booking', () => {
   let room12;
 
   beforeEach(() => {
-    const bData1 = mockdata.bookings[0];
-    const bData2 = mockdata.bookings[mockdata.bookings.length-1];
+    const bData1 = bookings[0];
+    const bData2 = bookings[bookings.length-1];
 
-    user9 = new Customer(mockdata.customers[5]);
-    user1 = new Customer(mockdata.customers[0]);
+    user9 = new Customer(customers[5]);
+    user1 = new Customer(customers[0]);
 
-    room15 = new Room(mockdata.rooms[6]);
-    room12 = new Room(mockdata.rooms[5]);
+    room15 = new Room(rooms[6]);
+    room12 = new Room(rooms[5]);
 
     booking1 = new Booking(user9, bData1.date, room15, bData1.id);
     booking2 = new Booking(user1, bData2.date, room12, bData2.id);

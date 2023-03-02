@@ -108,7 +108,6 @@ const bookings = [
         date: "2022/02/05",
         roomNumber: 12
     },
-
 ]
 
-export default {customers, rooms, bookings};
+export { customers, rooms, bookings }

@@ -1,15 +1,15 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Room from '../src/classes/Room';
-import mockdata from '../src/data/mockdata';
+import { bookings, rooms, customers } from '../src/data/mockdata';
 
 describe('Room', () => {
   let room1;
   let room2;
 
   beforeEach(() => {
-    room1 = new Room(mockdata.rooms[0]);
-		room2 = new Room(mockdata.rooms[mockdata.rooms.length-1]);
+    room1 = new Room(rooms[0]);
+		room2 = new Room(rooms[rooms.length-1]);
   });
 
 	it('should have a number', () => {

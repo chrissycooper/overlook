@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Customer from '../src/classes/Customer';
-import mockdata from '../src/data/mockdata';
+import { customers, rooms, bookings} from '../src/data/mockdata';
 import Room from '../src/classes/Room';
 
 
@@ -11,9 +11,9 @@ describe('Customer', () => {
 	let room1;
 
   beforeEach(() => {
-    customer1 = new Customer(mockdata.customers[0])
-    customer2 = new Customer(mockdata.customers[5])
-		room1 = new Room(mockdata.rooms[0])
+    customer1 = new Customer(customers[0])
+    customer2 = new Customer(customers[5])
+		room1 = new Room(rooms[0])
   })
 
   it('should have an id', () => {
@@ -31,8 +31,13 @@ describe('Customer', () => {
   });
 
 	it('should be able to make a booking', () => {
-		// customer1.bookRoom(room1);
-    // expect(customer1.bookings).to.deep.equal([room1]);
+		customer1.bookRoom(room1, "2024/04/22");
+    expect(customer1.bookings[0].userID).to.equal(1);
+    expect(customer1.bookings[0].date).to.equal("2024/04/22");
+    expect(customer1.bookings[0].roomNumber).to.equal(1);
 	})
-
+	
+	it('should be able to parse bookings data', () => {
+		customer1.createBookingArray(bookings);
+	})
 });
