@@ -13,6 +13,7 @@
 
 body {
   background: #CDEEF4;
+  /* background-image: url('./images/motel-carpet.png'); */
   /* background: linear-gradient(0deg, rgba(129,214,227,1) 0%, rgba(3,1,44,1) 100%); */
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,6 +34,10 @@ nav {
   width: 100vw;
   background-color: rgb(3,1,44, .9);
   margin: 0px;
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
 }
 
 .logo {
@@ -81,7 +86,8 @@ h2 {
 }
 
 .balance {
-  color: red;
+  color: #2F52E0;
+  margin: 25px;
 }
 
 

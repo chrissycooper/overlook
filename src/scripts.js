@@ -6,6 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import './images/motel-carpet.png'
 import { apiCalls } from './apiCalls';
 import Customer from './classes/Customer';
 
@@ -13,6 +14,7 @@ import Customer from './classes/Customer';
 console.log('This is the JavaScript entry file - your code begins here.');
 
 const userBookingsSection = document.getElementById("userBookings");
+const totalSpentHTML = document.getElementById("total-spent")
 
 let testUser, bookingsData, roomsData
 
@@ -40,6 +42,8 @@ function displayUserInfo(){
         <p>Cost Per Night: ${booking.costPerNight}</p>
         </div>
         `
+    
+    totalSpentHTML.innerHTML = `$${testUser.calculateTotalSpent()}`
     })
 
 

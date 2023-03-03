@@ -45,7 +45,6 @@ describe('Customer', () => {
     expect(customer1.bookings[0].roomNumber).to.equal(12);
     expect(customer1.bookings[0].userID).to.equal(1);
     expect(customer1.bookings[0].date).to.equal("2022/02/05");
-
 	})
 	
   it('should be able to calculate total amount spent', () => {
@@ -53,8 +52,6 @@ describe('Customer', () => {
     customer1.bookRoom(room1, "2024/04/22");
     const totalSpent = customer1.calculateTotalSpent();
     expect(totalSpent).to.equal(530.49);
-
-
 	})
 
 

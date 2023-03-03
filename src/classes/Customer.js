@@ -26,7 +26,7 @@ class Customer {
 	calculateTotalSpent() {
     return this.bookings.reduce((acc, booking) => {
       return acc += booking.costPerNight
-    }, 0)
+    }, 0).toFixed(2)
   }
 }
 
