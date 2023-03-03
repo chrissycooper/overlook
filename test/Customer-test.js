@@ -51,7 +51,7 @@ describe('Customer', () => {
 		customer1.createBookingArray(bookings, rooms);
     customer1.bookRoom(room1, "2024/04/22");
     const totalSpent = customer1.calculateTotalSpent();
-    expect(totalSpent).to.equal(530.49);
+    expect(totalSpent).to.equal('530.49');
 	})
 
 
