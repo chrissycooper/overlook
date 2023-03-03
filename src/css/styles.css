@@ -1,3 +1,10 @@
+/* palette */
+/* light cyan CDEEF4 */
+/* Off red #FA0000 */
+/* mexican pink #E31C79 */
+/* oxford blue #03012C */
+/* byzantine blue #2F52E0 */
+/* misty rose #FFE3E3 */
 
 * {
   font-family:'Raleway';
@@ -18,6 +25,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 nav {
@@ -40,6 +48,16 @@ nav {
   font-kerning: none;
 }
 
+.userBookingsSect {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  border: solid 1px red;
+}
+
 .dashboard {
   width: 200px;
   height: 200px;
@@ -57,9 +75,13 @@ nav {
   align-items: center;
 }
 
+
 h2 {
   color: #03012C;
-  opacity: 100%;
+}
+
+.balance {
+  color: red;
 }
 
 

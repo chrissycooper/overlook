@@ -30,6 +30,18 @@ Promise.all(apiCalls)
 function displayUserInfo(){
     testUser.createBookingArray(bookingsData, roomsData)
     console.log(testUser.bookings)
-    testUser.bookings.forEach()
+    userBookingsSection.innerHTML = ''
+    testUser.bookings.forEach(booking => {
+        userBookingsSection.innerHTML += 
+        `
+        <div class="current-bookings dashboard">
+        <p>Date: ${booking.date}</p>
+        <p>Room Number: ${booking.roomNumber}</p>
+        <p>Cost Per Night: ${booking.costPerNight}</p>
+        </div>
+        `
+    })
+
+
     //sort them by date?
 }
