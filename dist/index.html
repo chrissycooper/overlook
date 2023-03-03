@@ -14,17 +14,30 @@
     <h2 class="balance">Total Amount Spent: <p id="total-spent"></p></h2>
   </nav>
   <main>
-    <form>
-      <input type="date">
-    </form>
-    <h2 class="yourBookings">Your Booking History</h2> 
-    <section class="userBookingsSect" id="userBookings">
-      <!-- <div class="current-bookings dashboard" id="userBookings">
-        <p>Date:</p>
-        <p>Room Number:</p>
-        <p>Cost Per Night:</p>
-      </div> -->
+    <section class="makeNewBooking userBookingsSect">
+      <h2>Plan Your Next Stay</h2>
+      <h3>See Available Rooms by Date:</h3>
+      <form>
+        <input type="date" id="choiceOfDate" required>
+        <button id="dateSubmit">submit</button>
+      </form>
+      <section id="availableBookings">
+        <!-- <div class="current-bookings dashboard">
+          <p>Date:</p>
+          <p>Room Number:</p>
+          <p>Cost Per Night:</p>
+        </div> -->
+      </section>
     </section>
+    <div class="wrapper">
+      <section class="userBookingsSect" id="userBookings">
+        <!-- <div class="current-bookings dashboard" id="userBookings">
+          <p>Date:</p>
+          <p>Room Number:</p>
+          <p>Cost Per Night:</p>
+        </div> -->
+      </section>
+    </div>
   </main>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   

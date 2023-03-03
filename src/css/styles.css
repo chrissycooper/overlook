@@ -3,7 +3,7 @@
 /* Off red #FA0000 */
 /* mexican pink #E31C79 */
 /* oxford blue #03012C */
-/* byzantine blue #2F52E0 */
+/* byzantine blue #2F52E0 47, 82, 224*/
 /* misty rose #FFE3E3 */
 
 * {
@@ -23,19 +23,20 @@ body {
 main {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-direction: row;
 }
 
 nav {
-  height: 20vh;
+  height: 18vh;
   width: 100vw;
   background-color: rgb(3,1,44, .75);
   margin: 0px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-end;
+  border-bottom: 2mm ridge rgba(47, 82, 224, .6);
 }
 
 .logo {
@@ -52,7 +53,7 @@ nav {
 }
 
 .userBookingsSect {
-  width: 50vw;
+  width: 30vw;
   height: 80vh;
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +63,6 @@ nav {
   background-color: #03012C;
   opacity: 75%;
   overflow-y: scroll;
-  
  }
 
 .dashboard {
@@ -75,17 +75,32 @@ nav {
   justify-content: center;
 }
 
-.current-bookings {
+.current-bookings,
+.available-bookings {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
+  width: 30vw;
+}
+
+.available-bookings {
+  height: 200px;
+  width: 25vw;
 }
 
 
-h2 {
+h2,
+h3 {
+  color: whitesmoke;
+  padding: 10px;
+}
+
+.room-type{
+  text-transform: capitalize;
   color: #03012C;
 }
+
 
 .balance {
   color: #2F52E0;
