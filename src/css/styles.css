@@ -1,3 +1,93 @@
-body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+/* palette */
+/* light cyan CDEEF4 */
+/* Off red #FA0000 */
+/* mexican pink #E31C79 */
+/* oxford blue #03012C */
+/* byzantine blue #2F52E0 */
+/* misty rose #FFE3E3 */
+
+* {
+  font-family:'Raleway';
+  margin: 0px;
 }
+
+body {
+  background: #CDEEF4;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+nav {
+  height: 20vh;
+  width: 100vw;
+  background-color: rgb(3,1,44, .9);
+  margin: 0px;
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+
+.logo {
+  color: white;
+	font-size: 47px;
+	font-family: sans-serif;
+  z-index: 1;
+  position: absolute;
+  -webkit-text-stroke: 2px #E21F03;
+  position: absolute;
+  text-shadow: 5px 6px 12px #E31C79;
+  margin: 25px;
+  font-kerning: none;
+}
+
+.userBookingsSect {
+  width: 50vw;
+  height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  border: solid 1px red;
+}
+
+.dashboard {
+  width: 200px;
+  height: 100px;
+  background: white;
+  margin: 25px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.current-bookings {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+h2 {
+  color: #03012C;
+}
+
+.balance {
+  color: #2F52E0;
+  margin: 25px;
+}
+
+
+
+

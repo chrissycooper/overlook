@@ -6,6 +6,46 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import './images/motel-carpet.png'
+import { apiCalls } from './apiCalls';
+import Customer from './classes/Customer';
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
+
+const userBookingsSection = document.getElementById("userBookings");
+const totalSpentHTML = document.getElementById("total-spent")
+
+let testUser, bookingsData, roomsData
+
+Promise.all(apiCalls)
+    .then(values => {
+        bookingsData = values[0].bookings
+        roomsData = values[1].rooms
+        const customersData = values[2].customers
+        testUser = new Customer(values[3])
+        console.log(testUser)
+        displayUserInfo()
+    })
+
+
+function displayUserInfo(){
+    testUser.createBookingArray(bookingsData, roomsData)
+    console.log(testUser.bookings)
+    userBookingsSection.innerHTML = ''
+    testUser.bookings.forEach(booking => {
+        userBookingsSection.innerHTML += 
+        `
+        <div class="current-bookings dashboard">
+        <p>Date: ${booking.date}</p>
+        <p>Room Number: ${booking.roomNumber}</p>
+        <p>Cost Per Night: ${booking.costPerNight}</p>
+        </div>
+        `
+    
+    totalSpentHTML.innerHTML = `$${testUser.calculateTotalSpent()}`
+    })
+
+
+    //sort them by date?
+}
