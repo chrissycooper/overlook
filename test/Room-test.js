@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import Room from '../src/classes/Room';
-import { bookings, rooms, customers } from '../src/data/mockdata';
+import { rooms } from '../src/data/mockdata';
 
 describe('Room', () => {
   let room1;
@@ -9,7 +9,7 @@ describe('Room', () => {
 
   beforeEach(() => {
     room1 = new Room(rooms[0]);
-		room2 = new Room(rooms[rooms.length-1]);
+	room2 = new Room(rooms[rooms.length-1]);
   });
 
 	it('should have a number', () => {

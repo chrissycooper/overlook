@@ -1,5 +1,6 @@
 import Room from "./Room"
 import Booking from "./Booking";
+import Customer from "./Customer";
 
 class Hotel {
   constructor() {
@@ -8,19 +9,17 @@ class Hotel {
 		this.customers =[];
   }
 
-	parseRooms(roomsData, bookingData) {
+	parseHotelData(roomsData, bookingsData, customerData) {
 		this.rooms = roomsData.map(room => new Room(room))
-		this.bookings = bookingData.map(booking => {
+		this.bookings = bookingsData.map(booking => {
 			const roomMatch = this.rooms.find(room => room.number === booking.roomNumber)
 			return new Booking(booking.userID, booking.date, roomMatch, booking.id)
 		})
-	}
-
-	parseBookings(bookingData) {
-	}
-
-	parseCustomers(customerData) {
-		this.customers = customerData.map(user => new Room(user))
+		this.customers = customerData.map(user => {
+			const customer = new Customer(user)
+			customer.createBookingArray(bookingsData, roomsData)
+			return customer
+		})
 	}
 
 }
