@@ -11,13 +11,25 @@ import Customer from './classes/Customer';
 
 
 console.log('This is the JavaScript entry file - your code begins here.');
-let testUser;
+
+const userBookingsSection = document.getElementById("userBookings");
+
+let testUser, bookingsData, roomsData
 
 Promise.all(apiCalls)
     .then(values => {
-        const bookingsData = values[0].bookings
-        const roomsData = values[1].rooms
+        bookingsData = values[0].bookings
+        roomsData = values[1].rooms
         const customersData = values[2].customers
         testUser = new Customer(values[3])
         console.log(testUser)
+        displayUserInfo()
     })
+
+
+function displayUserInfo(){
+    testUser.createBookingArray(bookingsData, roomsData)
+    console.log(testUser.bookings)
+    testUser.bookings.forEach()
+    //sort them by date?
+}
