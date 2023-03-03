@@ -30,7 +30,7 @@ main {
 nav {
   height: 20vh;
   width: 100vw;
-  background-color: rgb(3,1,44, .9);
+  background-color: rgb(3,1,44, .75);
   margin: 0px;
   display:flex;
   flex-direction: column;
@@ -59,7 +59,11 @@ nav {
   flex-direction: row;
   justify-content: center;
   border: solid 1px red;
-}
+  background-color: #03012C;
+  opacity: 75%;
+  overflow-y: scroll;
+  
+ }
 
 .dashboard {
   width: 200px;
@@ -86,6 +90,10 @@ h2 {
 .balance {
   color: #2F52E0;
   margin: 25px;
+  padding: 25px;
+  background-color: #03012C;
+  width: 300px;
+  border-radius: 15px;
 }
 
 
