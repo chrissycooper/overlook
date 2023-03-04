@@ -23,7 +23,7 @@ class Hotel {
 		});
 	};
 
-	filterForAvailableRooms(date) {
+	filterForAvailableRooms(date, roomType) {
 		const roomsBooked = this.bookings.filter(booking => booking.date === date).map(booking => booking.roomNumber);
 		
 		const availableRooms = this.rooms.reduce((acc, room) => {
@@ -33,7 +33,7 @@ class Hotel {
 			return acc;
 		}, []);
 
-		return availableRooms;
+		return availableRooms.filter(room => room.type === roomType)
 	};
 
 };

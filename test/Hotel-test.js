@@ -9,7 +9,7 @@ describe('Hotel', () => {
 
   beforeEach(() => {
     hotel = new Hotel();
-		hotel.parseHotelData(rooms, bookings, customers);
+	hotel.parseHotelData(rooms, bookings, customers);
   });
 
   it('Should have properties for rooms, bookings, and customers', () => {
@@ -44,9 +44,20 @@ describe('Hotel', () => {
 		expect(hotel.customers[0].bookings[0].costPerNight).to.equal(172.09);
 	});
 
-	it('Should be able to filter for available rooms', () => {
+	it('Should be able to filter for available rooms by date', () => {
 		const allRooms = hotel.rooms;
 		const availableRooms = hotel.filterForAvailableRooms("2022/04/22");
-    expect(availableRooms).to.be.an('array').that.does.not.include(allRooms[6]);
+    	expect(availableRooms).to.be.an('array').that.does.not.include(allRooms[6]);
+  	});
+
+	it('Should be able to filter for available rooms by type and date', () => {
+		const allRooms = hotel.rooms;
+		const availableRooms = hotel.filterForAvailableRooms("2022/04/22", "single room");
+    	expect(availableRooms).to.be.an('array').that.does.not.include(allRooms[6]);
+		expect(availableRooms[0].type).to.equal('single room');
+
+		const availableSuites = hotel.filterForAvailableRooms("2022/04/22", "suite")
+		expect(availableSuites[0].type).to.equal('suite');
+		expect(availableSuites[availableSuites.length-1].type).to.equal('suite');
   });
 });

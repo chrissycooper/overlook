@@ -53,7 +53,6 @@ function displayAvailableRooms(event) {
     if(dateInput.value) {
         const convertedDate = dateInput.value.split('-').join('/');
         const availableRooms = outlookMotel.filterForAvailableRooms(convertedDate)
-        console.log(availableRooms)
         availableRoomsDisplay.innerHTML = '';
         availableRooms.forEach(room => {
             let answer = room.bidet ? 'Bidet!' : 'No Bidet :(';
