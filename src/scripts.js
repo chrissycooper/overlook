@@ -40,10 +40,10 @@ function displayUserInfo(){
     testUser.bookings.forEach(booking => {
         userBookingsSection.innerHTML += 
         `
-        <div class="current-bookings dashboard">
+        <div class="current-bookings dashboard" tabindex="0">
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
-        <p>Cost Per Night: ${booking.costPerNight}</p>
+        <p>Cost Per Night: $${booking.costPerNight}</p>
         </div>
         `
     totalSpentHTML.innerHTML = `$${testUser.calculateTotalSpent()}`
@@ -59,6 +59,7 @@ function bookRoom(event) {
         hide(event.target.parentNode);
         testUser.bookRoom(room, convertedDate);
         displayUserInfo();
+        outlookMotel.bookings.push(newBooking);
     }
 }
 
@@ -68,23 +69,29 @@ function displayAvailableRooms(event) {
         const convertedDate = dateInput.value.split('-').join('/');
         const convertedSelection = roomSelect.value.split('-').join(' ');
         const availableRooms = outlookMotel.filterForAvailableRooms(convertedDate, convertedSelection);
+        
         availableRoomsDisplay.innerHTML = '';
-        availableRooms.forEach(room => {
-            let answer = room.bidet ? 'Bidet!' : 'No Bidet :(';
-            availableRoomsDisplay.innerHTML +=
+
+        if(availableRooms.length){
+            availableRooms.forEach(room => {
+                let answer = room.bidet ? 'Bidet!' : 'No Bidet :(';
+                availableRoomsDisplay.innerHTML +=
+                    `
+                    <div class="available-bookings dashboard">
+                        <h3 class="room-type">${room.type}</h3>
+                        <p>Date: ${dateInput.value}</p>
+                        <p>Room Number: ${room.number}</p>
+                        <p>Bed Size: ${room.bedSize}</p>
+                        <p>${room.numBeds} ${room.numBeds === 1 ? "Bed" : "Beds"}</p>
+                        <p>${answer}</p>
+                        <p>Cost Per Night:$ ${room.costPerNight}</p>
+                        <button id="${room.number}" class="bookBtn">Book This Room</button>
+                    </div>
                 `
-                <div class="available-bookings dashboard">
-                    <h3 class="room-type">${room.type}</h3>
-                    <p>Date: ${dateInput.value}</p>
-                    <p>Room Number: ${room.number}</p>
-                    <p>Bed Size: ${room.bedSize}</p>
-                    <p>${room.numBeds} ${room.numBeds === 1 ? "Bed" : "Beds"}</p>
-                    <p>${answer}</p>
-                    <p>Cost Per Night: ${room.costPerNight}</p>
-                    <button id="${room.number}" class="bookBtn">Book This Room</button>
-                </div>
-            `
-        })
+            })
+        } else {
+            availableRoomsDisplay.innerHTML += `<p class="apology">Our deepest apologies, there are no available rooms of that type on that date, please have mercy on our souls and adjust your search.</p>`
+        }
     }
 }
 

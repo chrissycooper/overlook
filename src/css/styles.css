@@ -116,6 +116,10 @@ h3 {
   border-radius: 15px;
 }
 
+.apology{
+  color: #2F52E0;
+}
+
 .hidden{
   display: none;
 }
