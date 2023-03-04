@@ -9,6 +9,7 @@ import './images/motel-carpet.png';
 import { apiCalls } from './apiCalls';
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
+import Booking from './classes/Booking';
 
 const userBookingsSection = document.getElementById("userBookings");
 const totalSpentHTML = document.getElementById("total-spent");
@@ -28,11 +29,11 @@ Promise.all(apiCalls)
         testUser.createBookingArray(bookingsData, roomsData);
         outlookMotel = new Hotel();
         outlookMotel.parseHotelData(roomsData, bookingsData, customersData);
-        console.log('outlookmotel', outlookMotel);
         displayUserInfo();
     });
 
 submitButton.addEventListener('click', displayAvailableRooms);
+availableRoomsDisplay.addEventListener('click', bookRoom)
 
 function displayUserInfo(){
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
@@ -47,6 +48,15 @@ function displayUserInfo(){
         `
     totalSpentHTML.innerHTML = `$${testUser.calculateTotalSpent()}`
     })
+}
+
+function bookRoom(event) {
+    if(event.target.classList.contains("bookBtn")) {
+        const convertedDate = dateInput.value.split('-').join('/');
+        const room = outlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
+        let newBooking = new Booking(testUser.id, convertedDate, room);
+        console.log('booking', newBooking)
+    }
 }
 
 function displayAvailableRooms(event) {
@@ -68,6 +78,7 @@ function displayAvailableRooms(event) {
                     <p>${room.numBeds} ${room.numBeds === 1 ? "Bed" : "Beds"}</p>
                     <p>${answer}</p>
                     <p>Cost Per Night: ${room.costPerNight}</p>
+                    <button id="${room.number}" class="bookBtn">Book This Room</button>
                 </div>
             `
         })
