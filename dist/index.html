@@ -19,6 +19,14 @@
       <h3>See Available Rooms by Date:</h3>
       <form>
         <input type="date" id="choiceOfDate" required>
+        <label for="room-select" class="label">Choose a Room Type:</label>
+          <select name="rooms" id="room-select">
+            <option value="">--Please choose an option--</option>
+            <option value="residential-suite">Residential Suite</option>
+            <option value="suite">Suite</option>
+            <option value="single-room">Single Room</option>
+            <option value="junior-suite">Junior Suite</option>
+          </select>
         <button id="dateSubmit">submit</button>
       </form>
       <section id="availableBookings">

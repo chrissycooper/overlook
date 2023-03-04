@@ -96,6 +96,11 @@ h3 {
   padding: 10px;
 }
 
+.label {
+  color: whitesmoke;
+  padding: 10px;
+}
+
 .room-type{
   text-transform: capitalize;
   color: #03012C;

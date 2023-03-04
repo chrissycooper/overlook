@@ -14,7 +14,8 @@ const userBookingsSection = document.getElementById("userBookings");
 const totalSpentHTML = document.getElementById("total-spent");
 const dateInput = document.getElementById("choiceOfDate");
 const submitButton = document.getElementById("dateSubmit");
-const availableRoomsDisplay = document.getElementById("availableBookings")
+const availableRoomsDisplay = document.getElementById("availableBookings");
+const roomSelect = document.getElementById('room-select')
 
 let outlookMotel, testUser;
 
@@ -52,7 +53,8 @@ function displayAvailableRooms(event) {
     event.preventDefault();
     if(dateInput.value) {
         const convertedDate = dateInput.value.split('-').join('/');
-        const availableRooms = outlookMotel.filterForAvailableRooms(convertedDate)
+        const convertedSelection = roomSelect.value.split('-').join(' ');
+        const availableRooms = outlookMotel.filterForAvailableRooms(convertedDate, convertedSelection);
         availableRoomsDisplay.innerHTML = '';
         availableRooms.forEach(room => {
             let answer = room.bidet ? 'Bidet!' : 'No Bidet :(';
