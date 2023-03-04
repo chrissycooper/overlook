@@ -6,7 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/motel-carpet.png';
-import { apiCalls } from './apiCalls';
+import { apiCalls, postNewBooking } from './apiCalls';
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
 import Booking from './classes/Booking';
@@ -55,7 +55,10 @@ function bookRoom(event) {
         const convertedDate = dateInput.value.split('-').join('/');
         const room = outlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
         let newBooking = new Booking(testUser.id, convertedDate, room);
-        console.log('booking', newBooking)
+        postNewBooking(newBooking);
+        hide(event.target.parentNode);
+        testUser.bookRoom(room, convertedDate);
+        displayUserInfo();
     }
 }
 
@@ -83,4 +86,8 @@ function displayAvailableRooms(event) {
             `
         })
     }
+}
+
+function hide(element){
+    element.classList.add('hidden')
 }
