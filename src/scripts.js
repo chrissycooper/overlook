@@ -16,7 +16,8 @@ const totalSpentHTML = document.getElementById("total-spent");
 const dateInput = document.getElementById("choiceOfDate");
 const submitButton = document.getElementById("dateSubmit");
 const availableRoomsDisplay = document.getElementById("availableBookings");
-const roomSelect = document.getElementById('room-select')
+const roomSelect = document.getElementById('room-select');
+const username = document.getElementById('user-name');
 
 let outlookMotel, testUser;
 
@@ -36,6 +37,7 @@ submitButton.addEventListener('click', displayAvailableRooms);
 availableRoomsDisplay.addEventListener('click', bookRoom)
 
 function displayUserInfo(){
+    username.innerText = testUser.name
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
     testUser.bookings.forEach(booking => {
         userBookingsSection.innerHTML += 
@@ -96,5 +98,5 @@ function displayAvailableRooms(event) {
 }
 
 function hide(element){
-    element.classList.add('hidden')
+    element.classList.add('hidden');
 }
