@@ -16,10 +16,15 @@ const totalSpentHTML = document.getElementById("total-spent");
 const dateInput = document.getElementById("choiceOfDate");
 const submitButton = document.getElementById("dateSubmit");
 const availableRoomsDisplay = document.getElementById("availableBookings");
+const loginPage = document.getElementById("login-page");
 const roomSelect = document.getElementById('room-select');
-const username = document.getElementById('user-name');
+const username = document.getElementById('username');
+const customerNameDisplay = document.getElementById('user-name');
+const password = document.getElementById('pass');
+const loginButton = document.getElementById('submitPass');
+const dashboardDisplay = document.getElementById("dashboard");
 
-let outlookMotel, testUser;
+let outlookMotel, currentUser, testUser;
 
 Promise.all(apiCalls)
     .then(values => {
@@ -30,16 +35,31 @@ Promise.all(apiCalls)
         testUser.createBookingArray(bookingsData, roomsData);
         outlookMotel = new Hotel();
         outlookMotel.parseHotelData(roomsData, bookingsData, customersData);
-        displayUserInfo();
+        // displayUserInfo();
     });
 
 submitButton.addEventListener('click', displayAvailableRooms);
-availableRoomsDisplay.addEventListener('click', bookRoom)
+availableRoomsDisplay.addEventListener('click', bookRoomForUser);
+loginButton.addEventListener('click', logIn)
 
-function displayUserInfo(){
-    username.innerText = testUser.name
+
+function logIn(event) {
+    //on click of the login button, the dashboard of the user should be viewable
+    event.preventDefault();
+    if(password.value === 'overlook2021') {
+        const currentUserID = parseInt(username.value.slice(-2));
+        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID) 
+        displayUserInfo(currentUser)
+    }
+}
+
+function displayUserInfo(user){
+    hide(loginPage)
+    show(dashboardDisplay)
+    customerNameDisplay.innerText = user.name
+    console.log('name', user.name, customerNameDisplay)
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
-    testUser.bookings.forEach(booking => {
+    user.bookings.forEach(booking => {
         userBookingsSection.innerHTML += 
         `
         <div class="current-bookings dashboard" tabindex="0">
@@ -48,19 +68,19 @@ function displayUserInfo(){
         <p>Cost Per Night: $${booking.costPerNight}</p>
         </div>
         `
-    totalSpentHTML.innerHTML = `$${testUser.calculateTotalSpent()}`
+    totalSpentHTML.innerHTML = `$${user.calculateTotalSpent()}`
     })
 }
 
-function bookRoom(event) {
+function bookRoomForUser(event) {
     if(event.target.classList.contains("bookBtn")) {
         const convertedDate = dateInput.value.split('-').join('/');
         const room = outlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
-        let newBooking = new Booking(testUser.id, convertedDate, room);
+        let newBooking = new Booking(currentUser.id, convertedDate, room);
         postNewBooking(newBooking);
         hide(event.target.parentNode);
-        testUser.bookRoom(room, convertedDate);
-        displayUserInfo();
+        currentUser.bookRoom(room, convertedDate);
+        displayUserInfo(currentUser);
         outlookMotel.bookings.push(newBooking);
     }
 }
