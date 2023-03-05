@@ -22,4 +22,18 @@ const testCustomer = fetch("http://localhost:3001/api/v1/customers/6")
 
 apiCalls = [bookingsData, roomsData, customersData, testCustomer];
 
-export { apiCalls }
+function postNewBooking(booking){
+    fetch('http://localhost:3001/api/v1/bookings', {
+        method: 'POST',
+        body: JSON.stringify({ "userID": booking.userID, "date": booking.date, "roomNumber": booking.roomNumber }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => alert(`Server Error: ${err}. Please try again later.`))
+    
+}
+
+export { apiCalls, postNewBooking }

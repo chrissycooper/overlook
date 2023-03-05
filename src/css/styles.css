@@ -3,7 +3,7 @@
 /* Off red #FA0000 */
 /* mexican pink #E31C79 */
 /* oxford blue #03012C */
-/* byzantine blue #2F52E0 */
+/* byzantine blue #2F52E0 47, 82, 224*/
 /* misty rose #FFE3E3 */
 
 * {
@@ -23,24 +23,25 @@ body {
 main {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-direction: row;
 }
 
 nav {
-  height: 20vh;
+  height: 18vh;
   width: 100vw;
-  background-color: rgb(3,1,44, .9);
+  background-color: rgb(3,1,44, .75);
   margin: 0px;
-  display:flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  display: flex;
+  flex-flow: column wrap;
   align-content: flex-end;
+  justify-content: center;
+  border-bottom: 2mm ridge rgba(47, 82, 224, .6);
 }
 
 .logo {
   color: white;
-	font-size: 47px;
+	font-size: 60pt;
 	font-family: sans-serif;
   z-index: 1;
   position: absolute;
@@ -52,14 +53,31 @@ nav {
 }
 
 .userBookingsSect {
-  width: 50vw;
-  height: 80vh;
+  width: 30vw;
+  height: 70vh;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  border: solid 1px red;
-}
+  background-color: #03012C;
+  opacity: 75%;
+  overflow-y: scroll;
+  margin: 50px;
+  border-radius: 15px;
+ }
+
+ .form-wrapper {
+  display: flex;
+  flex-flow: column wrap; 
+  align-items: center;
+ }
+
+ form{
+  display: flex;
+  flex-flow: column wrap;
+ }
+
+
 
 .dashboard {
   width: 200px;
@@ -71,21 +89,62 @@ nav {
   justify-content: center;
 }
 
-.current-bookings {
+.current-bookings,
+.available-bookings {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
+  width: 30vw;
+}
+
+.available-bookings {
+  height: 200px;
+  width: 25vw;
 }
 
 
-h2 {
+h2,
+h3 {
+  color: whitesmoke;
+  padding: 10px;
+}
+
+.userName {
+  display: flex;
+  
+}
+.name {
+  padding-left: 12px;
+}
+
+.label {
+  color: whitesmoke;
+  padding: 10px;
+}
+
+.room-type{
+  text-transform: capitalize;
   color: #03012C;
 }
 
+
 .balance {
   color: #2F52E0;
+  margin: 50px;
+  padding: 25px;
+  background-color: #03012C;
+  width: 300px;
+  border-radius: 15px;
+}
+
+.apology{
+  color: whitesmoke;
   margin: 25px;
+}
+
+.hidden{
+  display: none;
 }
 
 

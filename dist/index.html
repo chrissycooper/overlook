@@ -11,20 +11,36 @@
 <body style="background-image:url('./images/motel-carpet.png'); background-repeat: repeat; background-size:auto;">
   <nav class="navbar">
     <h1 class="logo">Overlook Motel</h1>
-    <h2 class="balance">Total Amount Spent: <p id="total-spent"></p> </h2>
+    <h2 class="userName">Welcome, <p id="user-name" class="name"></p>!</h2>
+    <h2 class="balance">Total Amount Spent: <p id="total-spent"></p></h2>
   </nav>
   <main>
-    <form>
-      <input type="date">
-    </form>
-    <h2 class="yourBookings">Your Booking History</h2> 
-    <section class="userBookingsSect" id="userBookings">
-      <!-- <div class="current-bookings dashboard" id="userBookings">
-        <p>Date:</p>
-        <p>Room Number:</p>
-        <p>Cost Per Night:</p>
-      </div> -->
+    <section class="makeNewBooking userBookingsSect">
+      <div class="form-wrapper">
+        <h2>Plan Your Next Stay</h2>
+        <h3>See Available Rooms by Date:</h3>
+        <form>
+          <input type="date" id="choiceOfDate" required>
+          <label for="room-select" class="label">Choose a Room Type:</label>
+            <select name="rooms" id="room-select">
+              <option value="">--Please choose an option--</option>
+              <option value="residential-suite">Residential Suite</option>
+              <option value="suite">Suite</option>
+              <option value="single-room">Single Room</option>
+              <option value="junior-suite">Junior Suite</option>
+            </select>
+          <button id="dateSubmit">submit</button>
+        </form>
+      </div>
+      <section id="availableBookings">
+        <!-- available bookings here -->
+      </section>
     </section>
+    <div class="wrapper">
+      <section class="userBookingsSect" id="userBookings">
+        <!-- user booking history here -->
+      </section>
+    </div>
   </main>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   

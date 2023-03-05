@@ -20,7 +20,7 @@ class Customer {
 
   bookRoom(room, date) {
     let newBooking = new Booking(this.id, date, room);
-    this.bookings.push(newBooking);
+    this.bookings.unshift(newBooking);
   }
 
 	calculateTotalSpent() {
