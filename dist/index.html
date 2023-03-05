@@ -6,9 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Raleway:wght@300;500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/83ada33ef5.js" crossorigin="anonymous"></script>
   <title>Overlook Motel Booking</title>
 </head>
 <body>
+  <section class="error hidden" id="error-sect">
+    <div class="modal" id="error-message">
+      <p id="error-message">uh, oh!</p>
+    </div>
+  </section>
   <section class="login-page" id="login-page">
     <section class="logo-section">
       <div class='outside'>
@@ -22,11 +28,11 @@
       <form action="" class="login">
         <div>
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username">
+          <input type="text" id="username" name="username" autocomplete="username">
         </div>
         <div>
           <label for="pass">Password (12 characters minimum):</label>
-          <input type="password" id="pass" name="password" minlength="12" required>
+          <input type="password" id="pass" name="password" minlength="12" autocomplete="current-password"required>
         </div>
           <input type="submit" value="Sign in" id="submitPass">
       </form>

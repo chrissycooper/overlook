@@ -23,6 +23,9 @@ const customerNameDisplay = document.getElementById('user-name');
 const password = document.getElementById('pass');
 const loginButton = document.getElementById('submitPass');
 const dashboardDisplay = document.getElementById("dashboard");
+const errorSection = document.getElementById('error-sect');
+const errMessage = document.getElementById("error-message");
+
 
 let outlookMotel, currentUser, testUser;
 
@@ -44,9 +47,8 @@ loginButton.addEventListener('click', logIn)
 
 
 function logIn(event) {
-    //on click of the login button, the dashboard of the user should be viewable
     event.preventDefault();
-    if(password.value === 'overlook2021') {
+    if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
         currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID)
         // Promise.all(getSingleUser(currentUserID))
@@ -56,6 +58,13 @@ function logIn(event) {
         // })
         // .catch(err => console.log(err))
         displayUserInfo(currentUser)
+    } else if (password.value === 'overlook2021' && username.value.length === 9){
+        const currentUserID = parseInt(username.value.slice(-1));
+        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID);
+        console.log(currentUser)
+        displayUserInfo(currentUser)
+    } else if(password.value || username.value){
+        showErrorModal();
     }
 }
 
@@ -63,12 +72,11 @@ function displayUserInfo(user){
     hide(loginPage)
     show(dashboardDisplay)
     customerNameDisplay.innerText = user.name + '!'
-    console.log('name', user.name, customerNameDisplay)
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
     user.bookings.forEach((booking, index) => {
         userBookingsSection.innerHTML += 
         `
-        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${testUser.bookings.length}">
+        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${user.bookings.length}">
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
         <p>Cost Per Night: $${booking.costPerNight}</p>
@@ -76,6 +84,16 @@ function displayUserInfo(user){
         `
     totalSpentHTML.innerHTML = `$${user.calculateTotalSpent()}`
     })
+}
+
+function showErrorModal() {
+    show(errorSection)
+    errMessage.innerText = 'Oops! Incorrect username or password';
+    setTimeout(() => {
+        hide(errorSection);
+        username.value = '';
+        password.value = '';
+    }, 1500)
 }
 
 function bookRoomForUser(event) {
