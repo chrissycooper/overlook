@@ -6,7 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/motel-carpet.png';
-import { apiCalls, postNewBooking } from './apiCalls';
+import { apiCalls, postNewBooking, getSingleUser } from './apiCalls';
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
 import Booking from './classes/Booking';
@@ -48,7 +48,13 @@ function logIn(event) {
     event.preventDefault();
     if(password.value === 'overlook2021') {
         const currentUserID = parseInt(username.value.slice(-2));
-        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID) 
+        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID)
+        // Promise.all(getSingleUser(currentUserID))
+        // .then(data => {
+        //     currentUser = data
+        //     displayUserInfo(currentUser)
+        // })
+        // .catch(err => console.log(err))
         displayUserInfo(currentUser)
     }
 }
