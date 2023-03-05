@@ -37,12 +37,12 @@ submitButton.addEventListener('click', displayAvailableRooms);
 availableRoomsDisplay.addEventListener('click', bookRoom)
 
 function displayUserInfo(){
-    username.innerText = testUser.name
+    username.innerText = testUser.name + '!'
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
-    testUser.bookings.forEach(booking => {
+    testUser.bookings.forEach((booking, index) => {
         userBookingsSection.innerHTML += 
         `
-        <div class="current-bookings dashboard" tabindex="0">
+        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${testUser.bookings.length}">
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
         <p>Cost Per Night: $${booking.costPerNight}</p>
