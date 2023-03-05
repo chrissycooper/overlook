@@ -38,7 +38,6 @@ Promise.all(apiCalls)
         testUser.createBookingArray(bookingsData, roomsData);
         outlookMotel = new Hotel();
         outlookMotel.parseHotelData(roomsData, bookingsData, customersData);
-        // displayUserInfo();
     });
 
 submitButton.addEventListener('click', displayAvailableRooms);
