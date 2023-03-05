@@ -77,8 +77,6 @@ nav {
   flex-flow: column wrap;
  }
 
-
-
 .dashboard {
   width: 200px;
   height: 100px;
@@ -103,19 +101,32 @@ nav {
   width: 25vw;
 }
 
+h2 {
+  margin-top: 10px;
+  font-size: 24pt;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+}
 
-h2,
 h3 {
+  font-size: 18pt;
+  display: flex;
   color: whitesmoke;
   padding: 10px;
+  flex-direction: column;
+}
+
+h4 {
+  font-size: 15pt;
+  display: flex;
+  color: whitesmoke;
+  padding: 10px;
+  flex-direction: column;
 }
 
 .userName {
   display: flex;
-  
-}
-.name {
-  padding-left: 12px;
 }
 
 .label {
@@ -127,7 +138,6 @@ h3 {
   text-transform: capitalize;
   color: #03012C;
 }
-
 
 .balance {
   color: #2F52E0;

@@ -62,13 +62,13 @@ function logIn(event) {
 function displayUserInfo(user){
     hide(loginPage)
     show(dashboardDisplay)
-    customerNameDisplay.innerText = user.name
+    customerNameDisplay.innerText = user.name + '!'
     console.log('name', user.name, customerNameDisplay)
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
-    user.bookings.forEach(booking => {
+    user.bookings.forEach((booking, index) => {
         userBookingsSection.innerHTML += 
         `
-        <div class="current-bookings dashboard" tabindex="0">
+        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${testUser.bookings.length}">
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
         <p>Cost Per Night: $${booking.costPerNight}</p>
