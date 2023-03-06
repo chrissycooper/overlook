@@ -72,15 +72,15 @@ describe('Hotel', () => {
 
 	it('should be able to get total revenue for today\'s date', () => {
 		const revenueToday = hotel.getRevenueToday();
-		expect(revenueToday).to.be.a('number');
-		expect(revenueToday).to.equal(0);
+		expect(revenueToday).to.be.a('string');
+		expect(revenueToday).to.equal('0.00');
 
 		let date = new Date().toJSON().slice(0, 10).split('-').join('/');
 		hotel.bookings.push(new Booking(1, date, room));
 
 		const revenue2 = hotel.getRevenueToday();
-		expect(revenue2).to.be.a('number');
-		expect(revenue2).to.equal(358.4);
+		expect(revenue2).to.be.a('string');
+		expect(revenue2).to.equal('358.40');
 	});
 
 	it('should be able to get percentage occupied rooms for today\'s date', () => {
@@ -94,6 +94,20 @@ describe('Hotel', () => {
 		const percent2 = hotel.getPercentageOccupied();
 		expect(percent2).to.be.a('number');
 		expect(percent2).to.equal(12.5);
+	});
+
+	it('should be able to search for customer by name', () => {
+		const user = hotel.searchUserByName("Kennedi Emard");
+	
+		expect(user.name).to.equal("Kennedi Emard");
+		expect(user.id).to.equal(4);
+
+		const user2 = hotel.searchUserByName("Christina Kulas");
+	
+		expect(user2.name).to.equal("Christina Kulas");
+		expect(user2.id).to.equal(13);
+		expect(user2.bookings.length).to.equal(1);
+
 	});
 
 });

@@ -52,7 +52,8 @@ class Hotel {
 		const roomsBooked = this.bookings.filter(booking => booking.date === date).reduce((acc, booking) => {
 			return acc += booking.costPerNight
 		}, 0)
-		return roomsBooked;
+
+		return roomsBooked.toFixed(2);
 	}
 
 	getPercentageOccupied() {
@@ -61,6 +62,10 @@ class Hotel {
 		
 		return (roomsBooked.length/this.rooms.length) * 100;
 	};
+
+	searchUserByName(searchTerm) {
+		return this.customers.find(customer => customer.name === searchTerm)
+	}
 };
 
 export default Hotel;

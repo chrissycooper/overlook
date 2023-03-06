@@ -27,6 +27,7 @@ const errorSection = document.getElementById('error-sect');
 const errMessage = document.getElementById("error-message");
 const managerView = document.getElementById("managerView");
 const balance = document.getElementById('balance');
+const userBookingFormView = document.getElementById('userBookingForm');
 
 const totalRoomsToday = document.getElementById('totalRoomsToday');
 const totalRevenueToday = document.getElementById('totalRevToday');
@@ -58,19 +59,12 @@ function logIn(event) {
         displayManagerView();
     } else if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
-        currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID)
-        // Promise.all(getSingleUser(currentUserID))
-        // .then(data => {
-        //     currentUser = data
-        //     displayUserInfo(currentUser)
-        // })
-        // .catch(err => console.log(err))
-        displayUserInfo(currentUser)
+    currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
+        displayUserInfo(currentUser);
     } else if (password.value === 'overlook2021' && username.value.length === 9){
         const currentUserID = parseInt(username.value.slice(-1));
         currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
-        console.log(currentUser)
-        displayUserInfo(currentUser)
+        displayUserInfo(currentUser);
     } else if(password.value || username.value){
         showErrorModal();
     }
@@ -96,16 +90,19 @@ function displayUserInfo(user){
 
 function displayManagerView() {
     show(managerView);
-    show(dashboardDisplay)
+    show(dashboardDisplay);
     hide(loginPage);
     hide(balance);
+    hide(userBookingsSection);
+    hide(userBookingFormView);
     customerNameDisplay.innerText = 'manager'; 
-    console.log(overlookMotel.bookings)
+    console.log(customerNameDisplay)
     const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+    console.log(new Date())
     console.log('date', date) //why is this one day later
     totalRoomsToday.innerText = `${overlookMotel.getRoomsAvailableToday(date).length}`;
     totalRevenueToday.innerText = `$${overlookMotel.getRevenueToday()}`;
-    percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`
+    percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`;
 }
 
 function showErrorModal() {
@@ -123,11 +120,7 @@ function bookRoomForUser(event) {
         const convertedDate = dateInput.value.split('-').join('/');
         const room = overlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
         let newBooking = new Booking(currentUser.id, convertedDate, room);
-        postNewBooking(newBooking);
-        hide(event.target.parentNode);
-        currentUser.bookRoom(room, convertedDate);
-        displayUserInfo(currentUser);
-        overlookMotel.bookings.push(newBooking);
+        postNewBooking(newBooking, event, currentUser, room, convertedDate);
     }
 }
 
@@ -169,3 +162,5 @@ function hide(element){
 function show(element){
     element.classList.remove('hidden');
 }
+
+export { hide, overlookMotel, displayUserInfo }

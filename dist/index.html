@@ -45,7 +45,7 @@
       <h3 class="balance" id="balance">Total Amount Spent: <p id="total-spent"></p></h3>
     </nav>
     <main>
-      <section class=" userBookingsSect ">
+      <section class="userBookingsSect" id="userBookingForm">
         <div class="form-wrapper">
           <h2>Plan Your Next Stay</h2>
           <h3>See Available Rooms by Date:</h3>
@@ -83,7 +83,12 @@
         <div class="wrapper">
           <section class="userBookingsSect" id="manageCustomers">
             <div class="form-wrapper" id="customerSearch">
-              <h3>Search Customers</h3>
+              <form action="">
+                <h3>Search Customers</h3>
+                <label for="customerSearchInput" class="label">Enter customer name</label>
+                <input type="text" id="customerSearchInput">
+                <button id="customerSearchSubmit">submit</button>
+              </form>
             </div>
           </section>
         </div>

@@ -1,3 +1,5 @@
+import { hide, overlookMotel, displayUserInfo } from "./scripts";
+// import Customer from "./classes/Customer";
 let apiCalls;
 
 const bookingsData = fetch("http://localhost:3001/api/v1/bookings")
@@ -30,8 +32,8 @@ function getSingleUser(userID) {
 }
 
 
-function postNewBooking(booking){
-    fetch('http://localhost:3001/api/v1/bookings', {
+function postNewBooking(booking, event, currentUser, room, convertedDate){
+    return fetch('http://localhost:3001/api/v1/bookings', {
         method: 'POST',
         body: JSON.stringify({ "userID": booking.userID, "date": booking.date, "roomNumber": booking.roomNumber }),
         headers: {
@@ -39,7 +41,17 @@ function postNewBooking(booking){
         }
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+        if(data.message.includes('successfully')){
+            overlookMotel.bookings.push(booking);
+            hide(event.target.parentNode);
+            currentUser.bookRoom(room, convertedDate);
+            displayUserInfo(currentUser);
+        } else {
+            throw new Error('An unexpected problem has occurred')
+        }
+        return data;
+    })
     .catch(err => alert(`Server Error: ${err}. Please try again later.`))
 }
 
