@@ -33,6 +33,9 @@ const totalRoomsToday = document.getElementById('totalRoomsToday');
 const totalRevenueToday = document.getElementById('totalRevToday');
 const percentOccupiedToday = document.getElementById('percentOccupied');
 
+const searchUserButton = document.getElementById('customerSearchSubmit');
+const searchUserInput = document.getElementById('customerSearchInput');
+
 
 let overlookMotel, currentUser, testUser;
 
@@ -51,6 +54,7 @@ Promise.all(apiCalls)
 submitButton.addEventListener('click', displayAvailableRooms);
 availableRoomsDisplay.addEventListener('click', bookRoomForUser);
 loginButton.addEventListener('click', logIn);
+searchUserButton.addEventListener('click', searchForUser);
 
 
 function logIn(event) {
@@ -122,6 +126,14 @@ function bookRoomForUser(event) {
         let newBooking = new Booking(currentUser.id, convertedDate, room);
         postNewBooking(newBooking, event, currentUser, room, convertedDate);
     }
+}
+
+function searchForUser(event) {
+    //on button click, search hotel users by name for the search input value
+    event.preventDefault()
+    const customer = overlookMotel.customers.find(customer => customer.name === searchUserInput.value);
+    console.log(customer)
+    return customer
 }
 
 function displayAvailableRooms(event) {
