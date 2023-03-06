@@ -39,6 +39,8 @@ const searchedName = document.getElementById('customerName');
 const customerInfoSection = document.getElementById('customerInfo');
 const phantomMenance = document.getElementById('phantomMenace')
 
+const customerBookings = document.getElementById('customerBookingsInfo');
+
 
 let overlookMotel, currentUser, testUser;
 
@@ -59,7 +61,7 @@ availableRoomsDisplay.addEventListener('click', bookRoomForUser);
 loginButton.addEventListener('click', logIn);
 customerInfoSection.addEventListener('click', event => {
     if (event.target.type === "checkbox") {
-        event.target.checked ? filterForFuture() : null
+        event.target.checked ? filterForFuture() : displayUserSearchInfo(currentUser)
     };
 })
 searchUserButton.addEventListener('click', () => {
@@ -69,6 +71,7 @@ searchUserButton.addEventListener('click', () => {
         currentUser = searchedUser;
     }
 });
+customerBookings.addEventListener('click', deleteBooking) //this is where we are 
 
 
 function logIn(event) {
@@ -113,10 +116,11 @@ function displayUserSearchInfo(user){
     customerInfoSection.innerHTML = `<h2 class="yourBookings">${user.name}'s History</h2>
     <p class='label'>Total Spent: $${user.calculateTotalSpent()}</p>
     <input type="checkbox" id="filterByDate" name="vehicle1" value="Bike">
-    <label for="vehicle1"> I have a bike</label>
+    <label for="filterByDate" class="label">Filter by Date</label>
     `
+    customerBookings.innerHTML = ''
     user.bookings.forEach((booking, index) => {
-        customerInfoSection.innerHTML += 
+        customerBookings.innerHTML += 
         `
         <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${user.bookings.length}">
         <p>Date: ${booking.date}</p>
@@ -135,7 +139,20 @@ function filterForFuture(){
         console.log(bDate, date)
         return bDate >= date
     });
-    console.log(filteredFuture)
+
+    customerBookings.innerHTML = ''
+
+    filteredFuture.forEach((booking, index) => {
+        customerBookings.innerHTML += 
+        `
+        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${filteredFuture.length}">
+        <p>Date: ${booking.date}</p>
+        <p>Room Number: ${booking.roomNumber}</p>
+        <p>Cost Per Night: $${booking.costPerNight}</p>
+        <button>Delete Booking</button>
+        </div>
+        `
+    })
 }
 
 function displayManagerView() {
