@@ -6,43 +6,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Raleway:wght@300;500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/83ada33ef5.js" crossorigin="anonymous"></script>
   <title>Overlook Motel Booking</title>
 </head>
-<body style="background-image:url('./images/motel-carpet.png'); background-repeat: repeat; background-size:auto;">
-  <nav class="navbar">
-    <h1 class="logo">Overlook Motel</h1>
-    <h2 class="userName">Welcome, <h2 id="user-name" class="name"></h2></h2>
-    <h3 class="balance">Total Amount Spent: <p id="total-spent"></p></h3>
-  </nav>
-  <main>
-    <section class="makeNewBooking userBookingsSect">
-      <div class="form-wrapper">
-        <h2>Plan Your Next Stay</h2>
-        <h3>See Available Rooms by Date:</h3>
-        <form>
-          <label for="choiceOfDate" class="label">Choose a Date:</label>
-          <input type="date" id="choiceOfDate" required>
-          <label for="room-select" class="label">Choose a Room Type:</label>
-            <select name="rooms" id="room-select">
-              <option value="">--Please choose an option--</option>
-              <option value="residential-suite">Residential Suite</option>
-              <option value="suite">Suite</option>
-              <option value="single-room">Single Room</option>
-              <option value="junior-suite">Junior Suite</option>
-            </select>
-          <button id="dateSubmit">submit</button>
-        </form>
-      </div>
-      <section id="availableBookings">
-        <!-- available bookings here -->
-      </section>
-    </section>
-    <div class="wrapper">
-      <section class="userBookingsSect" id="userBookings">
-        <!-- user booking history here -->
-      </section>
+<body>
+  <section class="error hidden" id="error-sect">
+    <div class="modal" id="error-message">
+      <p id="error-message">uh, oh!</p>
     </div>
-  </main>
+  </section>
+  <section class="login-page" id="login-page">
+    <section class="logo-section">
+      <div class='outside'>
+        <h1 class='overlook'>OVERLOOK</h1>
+        <h1 class='motel'>MOTEL</h1>
+        <div class='oval'><div>
+        <div class='shape'></div>
+      </div>
+    </section>
+    <section class="login">
+      <form action="" class="login">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" autocomplete="username">
+        </div>
+        <div>
+          <label for="pass">Password (12 characters minimum):</label>
+          <input type="password" id="pass" name="password" minlength="12" autocomplete="current-password"required>
+        </div>
+          <input type="submit" value="Sign in" id="submitPass">
+      </form>
+    </section>
+  </section>
+  <div class="dashboard-wrapper hidden" id="dashboard" style="background-image:url('./images/motel-carpet.png'); background-repeat: repeat; background-size:auto;">
+    <nav class="navbar">
+      <h1 class="logo">Overlook Motel</h1>
+      <h2 class="userName">Welcome, <h2 id="user-name" class="name"></h2></h2>
+      <h3 class="balance">Total Amount Spent: <p id="total-spent"></p></h3>
+    </nav>
+    <main>
+      <section class="makeNewBooking userBookingsSect">
+        <div class="form-wrapper">
+          <h2>Plan Your Next Stay</h2>
+          <h3>See Available Rooms by Date:</h3>
+          <form>
+            <label for="choiceOfDate" class="label">Choose a Date:</label>
+          <input type="date" id="choiceOfDate" required>
+            <label for="room-select" class="label">Choose a Room Type:</label>
+              <select name="rooms" id="room-select">
+                <option value="">--Please choose an option--</option>
+                <option value="residential-suite">Residential Suite</option>
+                <option value="suite">Suite</option>
+                <option value="single-room">Single Room</option>
+                <option value="junior-suite">Junior Suite</option>
+              </select>
+            <button id="dateSubmit">submit</button>
+          </form>
+        </div>
+        <section id="availableBookings">
+          <!-- available bookings here -->
+        </section>
+      </section>
+      <div class="wrapper">
+        <section class="userBookingsSect" id="userBookings">
+          <!-- user booking history here -->
+        </section>
+      </div>
+    </main>
+  </div>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

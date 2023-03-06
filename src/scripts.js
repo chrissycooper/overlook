@@ -6,7 +6,7 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/motel-carpet.png';
-import { apiCalls, postNewBooking } from './apiCalls';
+import { apiCalls, postNewBooking, getSingleUser } from './apiCalls';
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
 import Booking from './classes/Booking';
@@ -16,10 +16,18 @@ const totalSpentHTML = document.getElementById("total-spent");
 const dateInput = document.getElementById("choiceOfDate");
 const submitButton = document.getElementById("dateSubmit");
 const availableRoomsDisplay = document.getElementById("availableBookings");
+const loginPage = document.getElementById("login-page");
 const roomSelect = document.getElementById('room-select');
-const username = document.getElementById('user-name');
+const username = document.getElementById('username');
+const customerNameDisplay = document.getElementById('user-name');
+const password = document.getElementById('pass');
+const loginButton = document.getElementById('submitPass');
+const dashboardDisplay = document.getElementById("dashboard");
+const errorSection = document.getElementById('error-sect');
+const errMessage = document.getElementById("error-message");
 
-let outlookMotel, testUser;
+
+let outlookMotel, currentUser, testUser;
 
 Promise.all(apiCalls)
     .then(values => {
@@ -30,37 +38,72 @@ Promise.all(apiCalls)
         testUser.createBookingArray(bookingsData, roomsData);
         outlookMotel = new Hotel();
         outlookMotel.parseHotelData(roomsData, bookingsData, customersData);
-        displayUserInfo();
     });
 
 submitButton.addEventListener('click', displayAvailableRooms);
-availableRoomsDisplay.addEventListener('click', bookRoom)
+availableRoomsDisplay.addEventListener('click', bookRoomForUser);
+loginButton.addEventListener('click', logIn)
 
-function displayUserInfo(){
-    username.innerText = testUser.name + '!'
+
+function logIn(event) {
+    event.preventDefault();
+    if(password.value === 'overlook2021' && username.value.length === 10) {
+        const currentUserID = parseInt(username.value.slice(-2));
+        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID)
+        // Promise.all(getSingleUser(currentUserID))
+        // .then(data => {
+        //     currentUser = data
+        //     displayUserInfo(currentUser)
+        // })
+        // .catch(err => console.log(err))
+        displayUserInfo(currentUser)
+    } else if (password.value === 'overlook2021' && username.value.length === 9){
+        const currentUserID = parseInt(username.value.slice(-1));
+        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID);
+        console.log(currentUser)
+        displayUserInfo(currentUser)
+    } else if(password.value || username.value){
+        showErrorModal();
+    }
+}
+
+function displayUserInfo(user){
+    hide(loginPage)
+    show(dashboardDisplay)
+    customerNameDisplay.innerText = user.name + '!'
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
-    testUser.bookings.forEach((booking, index) => {
+    user.bookings.forEach((booking, index) => {
         userBookingsSection.innerHTML += 
         `
-        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${testUser.bookings.length}">
+        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${user.bookings.length}">
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
         <p>Cost Per Night: $${booking.costPerNight}</p>
         </div>
         `
-    totalSpentHTML.innerHTML = `$${testUser.calculateTotalSpent()}`
+    totalSpentHTML.innerHTML = `$${user.calculateTotalSpent()}`
     })
 }
 
-function bookRoom(event) {
+function showErrorModal() {
+    show(errorSection)
+    errMessage.innerText = 'Oops! Incorrect username or password';
+    setTimeout(() => {
+        hide(errorSection);
+        username.value = '';
+        password.value = '';
+    }, 1500)
+}
+
+function bookRoomForUser(event) {
     if(event.target.classList.contains("bookBtn")) {
         const convertedDate = dateInput.value.split('-').join('/');
         const room = outlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
-        let newBooking = new Booking(testUser.id, convertedDate, room);
+        let newBooking = new Booking(currentUser.id, convertedDate, room);
         postNewBooking(newBooking);
         hide(event.target.parentNode);
-        testUser.bookRoom(room, convertedDate);
-        displayUserInfo();
+        currentUser.bookRoom(room, convertedDate);
+        displayUserInfo(currentUser);
         outlookMotel.bookings.push(newBooking);
     }
 }
@@ -99,4 +142,7 @@ function displayAvailableRooms(event) {
 
 function hide(element){
     element.classList.add('hidden');
+}
+function show(element){
+    element.classList.remove('hidden');
 }
