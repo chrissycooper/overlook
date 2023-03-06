@@ -1,4 +1,5 @@
-import { hide, overlookMotel, displayUserInfo } from "./scripts";
+import Booking from "./classes/Booking";
+import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo } from "./scripts";
 // import Customer from "./classes/Customer";
 let apiCalls;
 
@@ -43,10 +44,12 @@ function postNewBooking(booking, event, currentUser, room, convertedDate){
     .then(res => res.json())
     .then(data => {
         if(data.message.includes('successfully')){
-            overlookMotel.bookings.push(booking);
+            let newBooking = new Booking(data.newBooking.userID, convertedDate, room, data.newBooking.id);
+            overlookMotel.bookings.push(newBooking);
             hide(event.target.parentNode);
-            currentUser.bookRoom(room, convertedDate);
+            currentUser.bookings.unshift(newBooking);
             displayUserInfo(currentUser);
+            displayUserSearchInfo(currentUser)
         } else {
             throw new Error('An unexpected problem has occurred')
         }

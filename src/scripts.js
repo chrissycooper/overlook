@@ -37,6 +37,7 @@ const searchUserButton = document.getElementById('customerSearchSubmit');
 const searchUserInput = document.getElementById('customerSearchInput');
 const searchedName = document.getElementById('customerName');
 const customerInfoSection = document.getElementById('customerInfo');
+const phantomMenance = document.getElementById('phantomMenace')
 
 
 let overlookMotel, currentUser, testUser;
@@ -60,8 +61,8 @@ searchUserButton.addEventListener('click', () => {
     const searchedUser = searchForUser(event);
     if(searchedUser){
         displayUserSearchInfo(searchedUser);
+        currentUser = searchedUser;
     }
-
 });
 
 
@@ -69,6 +70,8 @@ function logIn(event) {
     event.preventDefault();
     if(username.value === 'manager' && password.value === 'overlook2021') {
         displayManagerView();
+        currentUser = null;
+        console.log(currentUser)
     } else if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
     currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
@@ -102,7 +105,9 @@ function displayUserInfo(user){
 
 function displayUserSearchInfo(user){
     searchedName.innerText = user.name
-    customerInfoSection.innerHTML = `<h2 class="yourBookings">Customer's Booking History</h2>`
+    customerInfoSection.innerHTML = `<h2 class="yourBookings">${user.name}'s History</h2>
+    <p class='label'>Total Spent: $${user.calculateTotalSpent()}</p>
+    `
     user.bookings.forEach((booking, index) => {
         customerInfoSection.innerHTML += 
         `
@@ -112,7 +117,6 @@ function displayUserSearchInfo(user){
         <p>Cost Per Night: $${booking.costPerNight}</p>
         </div>
         `
-    totalSpentHTML.innerHTML = `$${user.calculateTotalSpent()}`
     })
 }
 
@@ -121,10 +125,12 @@ function displayManagerView() {
     show(dashboardDisplay);
     hide(loginPage);
     hide(balance);
-    hide(userBookingsSection);
-    hide(userBookingFormView);
+    show(userBookingFormView);
+    hide(phantomMenance);
+    // hide(userBookingsSection);
+    // hide(userBookingFormView);
     customerNameDisplay.innerText = 'manager'; 
-    console.log(customerNameDisplay)
+    
     const date = new Date().toJSON().slice(0, 10).split('-').join('/');
     console.log(new Date())
     console.log('date', date) //why is this one day later
@@ -156,6 +162,8 @@ function searchForUser(event) {
     event.preventDefault()
     const customer = overlookMotel.customers.find(customer => customer.name === searchUserInput.value);
     console.log(customer)
+    currentUser = customer;
+    console.log(currentUser)
     return customer
 }
 
@@ -198,4 +206,4 @@ function show(element){
     element.classList.remove('hidden');
 }
 
-export { hide, overlookMotel, displayUserInfo }
+export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo }
