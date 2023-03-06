@@ -35,6 +35,8 @@ const percentOccupiedToday = document.getElementById('percentOccupied');
 
 const searchUserButton = document.getElementById('customerSearchSubmit');
 const searchUserInput = document.getElementById('customerSearchInput');
+const searchedName = document.getElementById('customerName');
+const customerInfoSection = document.getElementById('customerInfo');
 
 
 let overlookMotel, currentUser, testUser;
@@ -54,7 +56,13 @@ Promise.all(apiCalls)
 submitButton.addEventListener('click', displayAvailableRooms);
 availableRoomsDisplay.addEventListener('click', bookRoomForUser);
 loginButton.addEventListener('click', logIn);
-searchUserButton.addEventListener('click', searchForUser);
+searchUserButton.addEventListener('click', () => {
+    const searchedUser = searchForUser(event);
+    if(searchedUser){
+        displayUserSearchInfo(searchedUser);
+    }
+
+});
 
 
 function logIn(event) {
@@ -81,6 +89,22 @@ function displayUserInfo(user){
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
     user.bookings.forEach((booking, index) => {
         userBookingsSection.innerHTML += 
+        `
+        <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${user.bookings.length}">
+        <p>Date: ${booking.date}</p>
+        <p>Room Number: ${booking.roomNumber}</p>
+        <p>Cost Per Night: $${booking.costPerNight}</p>
+        </div>
+        `
+    totalSpentHTML.innerHTML = `$${user.calculateTotalSpent()}`
+    })
+}
+
+function displayUserSearchInfo(user){
+    searchedName.innerText = user.name
+    customerInfoSection.innerHTML = `<h2 class="yourBookings">Customer's Booking History</h2>`
+    user.bookings.forEach((booking, index) => {
+        customerInfoSection.innerHTML += 
         `
         <div class="current-bookings dashboard" tabindex="0" alt-text="This is an entry of your booking history: number ${index} of ${user.bookings.length}">
         <p>Date: ${booking.date}</p>
@@ -129,7 +153,6 @@ function bookRoomForUser(event) {
 }
 
 function searchForUser(event) {
-    //on button click, search hotel users by name for the search input value
     event.preventDefault()
     const customer = overlookMotel.customers.find(customer => customer.name === searchUserInput.value);
     console.log(customer)
