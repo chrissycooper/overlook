@@ -57,6 +57,11 @@ Promise.all(apiCalls)
 submitButton.addEventListener('click', displayAvailableRooms);
 availableRoomsDisplay.addEventListener('click', bookRoomForUser);
 loginButton.addEventListener('click', logIn);
+customerInfoSection.addEventListener('click', event => {
+    if (event.target.type === "checkbox") {
+        event.target.checked ? filterForFuture() : null
+    };
+})
 searchUserButton.addEventListener('click', () => {
     const searchedUser = searchForUser(event);
     if(searchedUser){
@@ -107,6 +112,8 @@ function displayUserSearchInfo(user){
     searchedName.innerText = user.name
     customerInfoSection.innerHTML = `<h2 class="yourBookings">${user.name}'s History</h2>
     <p class='label'>Total Spent: $${user.calculateTotalSpent()}</p>
+    <input type="checkbox" id="filterByDate" name="vehicle1" value="Bike">
+    <label for="vehicle1"> I have a bike</label>
     `
     user.bookings.forEach((booking, index) => {
         customerInfoSection.innerHTML += 
@@ -120,6 +127,17 @@ function displayUserSearchInfo(user){
     })
 }
 
+function filterForFuture(){
+    let date = new Date().toJSON().slice(0, 10).split('-').join('');
+    date = parseInt(date)
+    const filteredFuture = currentUser.bookings.filter(booking => {
+        let bDate = parseInt(booking.date.split('/').join(''))
+        console.log(bDate, date)
+        return bDate >= date
+    });
+    console.log(filteredFuture)
+}
+
 function displayManagerView() {
     show(managerView);
     show(dashboardDisplay);
@@ -127,8 +145,7 @@ function displayManagerView() {
     hide(balance);
     show(userBookingFormView);
     hide(phantomMenance);
-    // hide(userBookingsSection);
-    // hide(userBookingFormView);
+    
     customerNameDisplay.innerText = 'manager'; 
     
     const date = new Date().toJSON().slice(0, 10).split('-').join('/');
@@ -161,9 +178,7 @@ function bookRoomForUser(event) {
 function searchForUser(event) {
     event.preventDefault()
     const customer = overlookMotel.customers.find(customer => customer.name === searchUserInput.value);
-    console.log(customer)
     currentUser = customer;
-    console.log(currentUser)
     return customer
 }
 
