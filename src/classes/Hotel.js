@@ -41,8 +41,8 @@ class Hotel {
 
 	};
 
-	getRoomsAvailableToday() {
-		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+	getRoomsAvailableToday(date) {
+		// const date = new Date().toJSON().slice(0, 10).split('-').join('/');
 
 		return this.filterForAvailableRooms(date);
 	}
@@ -57,10 +57,10 @@ class Hotel {
 
 	getPercentageOccupied() {
 		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
-		const roomsBooked = this.bookings.filter(booking => booking.date === date)
+		const roomsBooked = this.bookings.filter(booking => booking.date === date);
 		
-		return (roomsBooked.length/this.rooms.length) * 100
-	}
+		return (roomsBooked.length/this.rooms.length) * 100;
+	};
 };
 
 export default Hotel;

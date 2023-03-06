@@ -63,6 +63,7 @@ nav {
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: #03012C;
   opacity: 75%;
   margin: 50px;

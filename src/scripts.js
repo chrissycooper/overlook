@@ -44,17 +44,17 @@ Promise.all(apiCalls)
         testUser.createBookingArray(bookingsData, roomsData);
         overlookMotel = new Hotel();
         overlookMotel.parseHotelData(roomsData, bookingsData, customersData);
-    });
+    })
+
 
 submitButton.addEventListener('click', displayAvailableRooms);
 availableRoomsDisplay.addEventListener('click', bookRoomForUser);
-loginButton.addEventListener('click', logIn)
+loginButton.addEventListener('click', logIn);
 
 
 function logIn(event) {
     event.preventDefault();
     if(username.value === 'manager' && password.value === 'overlook2021') {
-        console.log("it working")
         displayManagerView();
     } else if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
@@ -77,8 +77,8 @@ function logIn(event) {
 }
 
 function displayUserInfo(user){
-    hide(loginPage)
-    show(dashboardDisplay)
+    hide(loginPage);
+    show(dashboardDisplay);
     customerNameDisplay.innerText = user.name + '!'
     userBookingsSection.innerHTML = `<h2 class="yourBookings">Your Booking History</h2>`
     user.bookings.forEach((booking, index) => {
@@ -100,7 +100,10 @@ function displayManagerView() {
     hide(loginPage);
     hide(balance);
     customerNameDisplay.innerText = 'manager'; 
-    totalRoomsToday.innerText = `${overlookMotel.getRoomsAvailableToday().length}`;
+    console.log(overlookMotel.bookings)
+    const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+    console.log('date', date) //why is this one day later
+    totalRoomsToday.innerText = `${overlookMotel.getRoomsAvailableToday(date).length}`;
     totalRevenueToday.innerText = `$${overlookMotel.getRevenueToday()}`;
     percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`
 }
