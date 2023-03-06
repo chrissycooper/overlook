@@ -45,7 +45,7 @@
       <h3 class="balance" id="balance">Total Amount Spent: <p id="total-spent"></p></h3>
     </nav>
     <main>
-      <section class="makeNewBooking userBookingsSect hidden">
+      <section class=" userBookingsSect hidden">
         <div class="form-wrapper">
           <h2>Plan Your Next Stay</h2>
           <h3>See Available Rooms by Date:</h3>
@@ -67,25 +67,27 @@
           <!-- available bookings here -->
         </section>
       </section>
-      <div class="wrapper">
+      <div class="wrapper" hidden>
         <section class="userBookingsSect" id="userBookings">
           <!-- user booking history here -->
         </section>
       </div>
 
-      <section class="makeNewBooking userBookingsSect managerView hidden" id="managerView">
-        <div class="form-wrapper">
-          
+      <section class="managerView hidden" id="managerView" >
+        <section class="hotelInfo" id="hotelInfo">
+          <h3>Today's Metrics</h3>
+          <p class="label">Total Rooms Available: <p id="totalRoomsToday" class="label"></p></p>
+          <p class="label">Total Revenue: <p id="totalRevToday" class="label"></p></p>
+          <p class="label">Percent Rooms Occupied: <p id="percentOccupied" class="label"></p></p>
+        </section>
+        <div class="wrapper">
+          <section class="userBookingsSect" id="manageCustomers">
+            <div class="form-wrapper" id="customerSearch">
+              <h3>Search Customers</h3>
+            </div>
+          </section>
         </div>
-        <section id="availableBookings">
-          <!-- available bookings here -->
-        </section>
       </section>
-      <div class="wrapper">
-        <section class="userBookingsSect" id="userBookings">
-          <!-- user booking history here -->
-        </section>
-      </div>
     </main>
   </div>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->

@@ -26,10 +26,14 @@ const dashboardDisplay = document.getElementById("dashboard");
 const errorSection = document.getElementById('error-sect');
 const errMessage = document.getElementById("error-message");
 const managerView = document.getElementById("managerView");
-const balance =document.getElementById('balance');
+const balance = document.getElementById('balance');
+
+const totalRoomsToday = document.getElementById('totalRoomsToday');
+const totalRevenueToday = document.getElementById('totalRevToday');
+const percentOccupiedToday = document.getElementById('percentOccupied');
 
 
-let outlookMotel, currentUser, testUser;
+let overlookMotel, currentUser, testUser;
 
 Promise.all(apiCalls)
     .then(values => {
@@ -38,8 +42,8 @@ Promise.all(apiCalls)
         const customersData = values[2].customers;
         testUser = new Customer(values[3]);
         testUser.createBookingArray(bookingsData, roomsData);
-        outlookMotel = new Hotel();
-        outlookMotel.parseHotelData(roomsData, bookingsData, customersData);
+        overlookMotel = new Hotel();
+        overlookMotel.parseHotelData(roomsData, bookingsData, customersData);
     });
 
 submitButton.addEventListener('click', displayAvailableRooms);
@@ -54,7 +58,7 @@ function logIn(event) {
         displayManagerView();
     } else if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
-        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID)
+        currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID)
         // Promise.all(getSingleUser(currentUserID))
         // .then(data => {
         //     currentUser = data
@@ -64,7 +68,7 @@ function logIn(event) {
         displayUserInfo(currentUser)
     } else if (password.value === 'overlook2021' && username.value.length === 9){
         const currentUserID = parseInt(username.value.slice(-1));
-        currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID);
+        currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
         console.log(currentUser)
         displayUserInfo(currentUser)
     } else if(password.value || username.value){
@@ -91,12 +95,14 @@ function displayUserInfo(user){
 }
 
 function displayManagerView() {
- show(managerView);
- show(dashboardDisplay)
- hide(loginPage);
- hide(balance);
- customerNameDisplay.innerText = 'manager'
-
+    show(managerView);
+    show(dashboardDisplay)
+    hide(loginPage);
+    hide(balance);
+    customerNameDisplay.innerText = 'manager'; 
+    totalRoomsToday.innerText = `${overlookMotel.getRoomsAvailableToday().length}`;
+    totalRevenueToday.innerText = `$${overlookMotel.getRevenueToday()}`;
+    percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`
 }
 
 function showErrorModal() {
@@ -112,13 +118,13 @@ function showErrorModal() {
 function bookRoomForUser(event) {
     if(event.target.classList.contains("bookBtn")) {
         const convertedDate = dateInput.value.split('-').join('/');
-        const room = outlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
+        const room = overlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
         let newBooking = new Booking(currentUser.id, convertedDate, room);
         postNewBooking(newBooking);
         hide(event.target.parentNode);
         currentUser.bookRoom(room, convertedDate);
         displayUserInfo(currentUser);
-        outlookMotel.bookings.push(newBooking);
+        overlookMotel.bookings.push(newBooking);
     }
 }
 
@@ -127,7 +133,7 @@ function displayAvailableRooms(event) {
     if(dateInput.value) {
         const convertedDate = dateInput.value.split('-').join('/');
         const convertedSelection = roomSelect.value.split('-').join(' ');
-        const availableRooms = outlookMotel.filterForAvailableRooms(convertedDate, convertedSelection);
+        const availableRooms = overlookMotel.filterForAvailableRooms(convertedDate, convertedSelection);
         
         availableRoomsDisplay.innerHTML = '';
 

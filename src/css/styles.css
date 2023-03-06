@@ -52,7 +52,25 @@ nav {
   font-kerning: none;
 }
 
-.userBookingsSect {
+.managerView {
+  display: flex;
+}
+
+.hotelInfo {
+  width: 25vw;
+  height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #03012C;
+  opacity: 75%;
+  margin: 50px;
+  border-radius: 15px;
+}
+
+
+.userBookingsSect{
   width: 30vw;
   height: 70vh;
   display: flex;
