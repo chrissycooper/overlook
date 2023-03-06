@@ -25,6 +25,8 @@ const loginButton = document.getElementById('submitPass');
 const dashboardDisplay = document.getElementById("dashboard");
 const errorSection = document.getElementById('error-sect');
 const errMessage = document.getElementById("error-message");
+const managerView = document.getElementById("managerView");
+const balance =document.getElementById('balance');
 
 
 let outlookMotel, currentUser, testUser;
@@ -47,7 +49,10 @@ loginButton.addEventListener('click', logIn)
 
 function logIn(event) {
     event.preventDefault();
-    if(password.value === 'overlook2021' && username.value.length === 10) {
+    if(username.value === 'manager' && password.value === 'overlook2021') {
+        console.log("it working")
+        displayManagerView();
+    } else if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
         currentUser = outlookMotel.customers.find(customer => customer.id === currentUserID)
         // Promise.all(getSingleUser(currentUserID))
@@ -83,6 +88,15 @@ function displayUserInfo(user){
         `
     totalSpentHTML.innerHTML = `$${user.calculateTotalSpent()}`
     })
+}
+
+function displayManagerView() {
+ show(managerView);
+ show(dashboardDisplay)
+ hide(loginPage);
+ hide(balance);
+ customerNameDisplay.innerText = 'manager'
+
 }
 
 function showErrorModal() {

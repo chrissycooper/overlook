@@ -15,7 +15,7 @@
       <p id="error-message">uh, oh!</p>
     </div>
   </section>
-  <section class="login-page" id="login-page">
+  <section class="login-page " id="login-page">
     <section class="logo-section">
       <div class='outside'>
         <h1 class='overlook'>OVERLOOK</h1>
@@ -42,10 +42,10 @@
     <nav class="navbar">
       <h1 class="logo">Overlook Motel</h1>
       <h2 class="userName">Welcome, <h2 id="user-name" class="name"></h2></h2>
-      <h3 class="balance">Total Amount Spent: <p id="total-spent"></p></h3>
+      <h3 class="balance" id="balance">Total Amount Spent: <p id="total-spent"></p></h3>
     </nav>
     <main>
-      <section class="makeNewBooking userBookingsSect">
+      <section class="makeNewBooking userBookingsSect hidden">
         <div class="form-wrapper">
           <h2>Plan Your Next Stay</h2>
           <h3>See Available Rooms by Date:</h3>
@@ -62,6 +62,20 @@
               </select>
             <button id="dateSubmit">submit</button>
           </form>
+        </div>
+        <section id="availableBookings">
+          <!-- available bookings here -->
+        </section>
+      </section>
+      <div class="wrapper">
+        <section class="userBookingsSect" id="userBookings">
+          <!-- user booking history here -->
+        </section>
+      </div>
+
+      <section class="makeNewBooking userBookingsSect managerView hidden" id="managerView">
+        <div class="form-wrapper">
+          
         </div>
         <section id="availableBookings">
           <!-- available bookings here -->

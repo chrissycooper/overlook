@@ -33,9 +33,34 @@ class Hotel {
 			return acc;
 		}, []);
 
-		return availableRooms.filter(room => room.type === roomType)
+		if(roomType) {
+			return availableRooms.filter(room => room.type === roomType)
+		} else {
+			return availableRooms
+		}
+
 	};
 
+	getRoomsAvailableToday() {
+		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+
+		return this.filterForAvailableRooms(date);
+	}
+
+	getRevenueToday(){
+		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+		const roomsBooked = this.bookings.filter(booking => booking.date === date).reduce((acc, booking) => {
+			return acc += booking.costPerNight
+		}, 0)
+		return roomsBooked;
+	}
+
+	getPercentageOccupied() {
+		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+		const roomsBooked = this.bookings.filter(booking => booking.date === date)
+		
+		return (roomsBooked.length/this.rooms.length) * 100
+	}
 };
 
 export default Hotel;

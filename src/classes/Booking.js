@@ -5,7 +5,6 @@ class Booking {
 	this.date = date;
 	this.roomNumber = room.number;
 	this.costPerNight = room.costPerNight;
-		//should this be a whole room? How do we want to access the data about the room in the booking? we could find all rooms by room number and then access that data there
   }
     
 }
