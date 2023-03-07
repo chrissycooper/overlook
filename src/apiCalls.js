@@ -1,6 +1,5 @@
 import Booking from "./classes/Booking";
-import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage, filterForFuture } from "./scripts";
-// import Customer from "./classes/Customer";
+import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage } from "./scripts";
 let apiCalls;
 
 const bookingsData = fetch("http://localhost:3001/api/v1/bookings")
@@ -24,13 +23,6 @@ const testCustomer = fetch("http://localhost:3001/api/v1/customers/6")
     .catch(err => console.log(err));
 
 apiCalls = [bookingsData, roomsData, customersData, testCustomer];
-
-function getSingleUser(userID) {
-   return fetch(`http://localhost:3001/api/v1/customers/${userID}`)
-    .then(response => response.json())
-    .then(data => currentUser = data)
-    .catch(err => console.log(err))
-}
 
 function postNewBooking(booking, event, currentUser, room, convertedDate){
     return fetch('http://localhost:3001/api/v1/bookings', {
@@ -69,7 +61,7 @@ function deleteBooking(bookingID, currentUser) {
         console.log(data);
         if(data.message.includes('deleted')){
             let ghostIndex;
-            const ghostBook = currentUser.bookings.find((booking, index )=> {
+            currentUser.bookings.find((booking, index )=> {
                 if(booking.id === bookingID){
                     ghostIndex = index;
                 }
@@ -95,4 +87,4 @@ function deleteBooking(bookingID, currentUser) {
 
 
 
-export { apiCalls, postNewBooking, getSingleUser, deleteBooking }
+export { apiCalls, postNewBooking, deleteBooking }

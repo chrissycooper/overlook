@@ -1,6 +1,6 @@
 import './css/styles.css';
 import './images/motel-carpet.png';
-import { apiCalls, postNewBooking, getSingleUser, deleteBooking } from './apiCalls';
+import { apiCalls, postNewBooking, deleteBooking } from './apiCalls';
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
 import Booking from './classes/Booking';
@@ -116,7 +116,7 @@ function displayUserSearchInfo(user){
     customerInfoSection.innerHTML = `<h2 class="yourBookings">${user.name}'s History</h2>
     <p class='label'>Total Spent: $${user.calculateTotalSpent()}</p>
     <input type="checkbox" id="filterByDate" name="vehicle1" value="Bike">
-    <label for="filterByDate" class="label">Filter by Date</label>
+    <label for="filterByDate" class="label">Filter by Future Dates</label>
     `
     customerBookings.innerHTML = ''
     user.bookings.forEach((booking, index) => {
@@ -235,4 +235,4 @@ function show(element){
     element.classList.remove('hidden');
 }
 
-export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage, filterForFuture }
+export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage }
