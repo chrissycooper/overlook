@@ -29,7 +29,7 @@ main {
 
 nav {
   height: 18vh;
-  width: 99vw;
+  width: 100vw;
   background-color: rgb(3,1,44, .75);
   margin: 0px;
   display: flex;
@@ -76,6 +76,8 @@ nav {
   opacity: 75%;
   margin: 50px;
   border-radius: 15px;
+  position: relative;
+  z-index: 1;
 }
 
 .customer-info {
@@ -97,6 +99,7 @@ nav {
   overflow-y: scroll;
   margin: 50px;
   border-radius: 15px;
+  z-index: 1;
  }
 
  .form-wrapper {
@@ -118,6 +121,10 @@ nav {
   border-radius: 15px;
   display: flex;
   justify-content: center;
+}
+
+.dashboard-wrapper {
+  height: 100vh;
 }
 
 .current-bookings,
@@ -260,14 +267,16 @@ h1 {
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  width: 30vw;
+  width: 20vw;
   border-radius: 15px;
   height: 20vh;
   background-color: #f1f1f1;
-  top: 50%;
+  /* transform: translate(-50%, -50%); */
+  /* top: 10%; */
   left: 40%;
   box-shadow: 0px 0px 10px #03012C;
   font-size: 15pt;
+  z-index: 1000 !important;
 }
 
 
