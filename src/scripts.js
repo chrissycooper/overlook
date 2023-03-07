@@ -64,6 +64,7 @@ searchUserButton.addEventListener('click', () => {
     if(searchedUser){
         displayUserSearchInfo(searchedUser);
         currentUser = searchedUser;
+        show(userBookingFormView)
     }
 });
 customerBookings.addEventListener('click', (event) => {
@@ -90,7 +91,9 @@ function logIn(event) {
         currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
         displayUserInfo(currentUser);
     } else if(password.value || username.value){
-        showErrorModal();
+        showErrorModal("Oops! incorrect username or password");
+    } else {
+        showErrorModal("Please fill out required fields");
     }
 }
 
@@ -160,10 +163,14 @@ function displayManagerView() {
     show(dashboardDisplay);
     hide(loginPage);
     hide(balance);
-    show(userBookingFormView);
+    hide(userBookingFormView);
     hide(phantomMenance);
     
     customerNameDisplay.innerText = 'manager'; 
+
+    if(currentUser) {
+        show(userBookingFormView);
+    }
     
     const date = new Date().toJSON().slice(0, 10).split('-').join('/');
     totalRoomsToday.innerText = `${overlookMotel.filterForAvailableRooms(date).length}`;
@@ -171,9 +178,9 @@ function displayManagerView() {
     percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`;
 }
 
-function showErrorModal() {
+function showErrorModal(message) {
     show(errorSection)
-    errMessage.innerText = 'Oops! Incorrect username or password';
+    errMessage.innerText = message;
     setTimeout(() => {
         hide(errorSection);
         username.value = '';
@@ -184,8 +191,8 @@ function showErrorModal() {
 function bookRoomForUser(event) {
     if(event.target.classList.contains("bookBtn")) {
         const convertedDate = dateInput.value.split('-').join('/');
-        const room = overlookMotel.rooms.find(room => room.number === parseInt(event.target.id))
-        let newBooking = new Booking(currentUser.id, convertedDate, room);
+        const room = overlookMotel.rooms.find(room => room.number === parseInt(event.target.id));
+        const newBooking = new Booking(currentUser.id, convertedDate, room);
         postNewBooking(newBooking, event, currentUser, room, convertedDate);
     }
 }
@@ -199,7 +206,8 @@ function searchForUser(event) {
 
 function displayAvailableRooms(event) {
     event.preventDefault();
-    if(dateInput.value) {
+    
+    if(dateInput.value ) {
         const convertedDate = dateInput.value.split('-').join('/');
         const convertedSelection = roomSelect.value.split('-').join(' ');
         const availableRooms = overlookMotel.filterForAvailableRooms(convertedDate, convertedSelection);
@@ -226,6 +234,11 @@ function displayAvailableRooms(event) {
         } else {
             availableRoomsDisplay.innerHTML += `<p class="apology">Our deepest apologies, there are no available rooms of that type on that date, please have mercy on our souls and adjust your search.</p>`
         }
+    } else if (!dateInput.value){
+        showErrorModal('Please choose a date')
+    } else if(convertedDate < date) {
+        console.log(convertedDate, date)
+        showErrorModal('Pleast choose a date in the present or future. This is not a time traveling motel.')
     }
 }
 
