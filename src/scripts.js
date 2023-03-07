@@ -165,7 +165,7 @@ function displayManagerView() {
     customerNameDisplay.innerText = 'manager'; 
     
     const date = new Date().toJSON().slice(0, 10).split('-').join('/');
-    totalRoomsToday.innerText = `${overlookMotel.getRoomsAvailableToday(date).length}`;
+    totalRoomsToday.innerText = `${overlookMotel.filterForAvailableRooms(date).length}`;
     totalRevenueToday.innerText = `$${overlookMotel.getRevenueToday()}`;
     percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`;
 }

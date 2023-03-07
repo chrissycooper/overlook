@@ -41,12 +41,6 @@ class Hotel {
 
 	};
 
-	getRoomsAvailableToday(date) {
-		// const date = new Date().toJSON().slice(0, 10).split('-').join('/');
-
-		return this.filterForAvailableRooms(date);
-	}
-
 	getRevenueToday(){
 		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
 		const roomsBooked = this.bookings.filter(booking => booking.date === date).reduce((acc, booking) => {

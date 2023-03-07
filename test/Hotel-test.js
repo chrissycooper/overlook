@@ -11,8 +11,8 @@ describe('Hotel', () => {
 
   beforeEach(() => {
     hotel = new Hotel();
-	hotel.parseHotelData(rooms, bookings, customers);
-	room = new Room(rooms[0])
+		hotel.parseHotelData(rooms, bookings, customers);
+		room = new Room(rooms[0])
   });
 
   it('Should have properties for rooms, bookings, and customers', () => {
@@ -65,7 +65,8 @@ describe('Hotel', () => {
   	});
 
 	it('should be able to get total available rooms for today\'s date', () => {
-		const roomsToday = hotel.getRoomsAvailableToday();
+		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+		const roomsToday = hotel.filterForAvailableRooms(date);
 		expect(roomsToday).to.be.an('array');
 		expect(roomsToday).to.deep.equal(hotel.rooms);
 	});
