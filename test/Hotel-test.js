@@ -85,15 +85,15 @@ describe('Hotel', () => {
 
 	it('should be able to get percentage occupied rooms for today\'s date', () => {
 		const percent = hotel.getPercentageOccupied();
-		expect(percent).to.be.a('number');
-		expect(percent).to.equal(0);
+		expect(percent).to.be.a('string');
+		expect(percent).to.equal('0.00');
 
 		let date = new Date().toJSON().slice(0, 10).split('-').join('/');
 		hotel.bookings.push(new Booking(1, date, room));
 
 		const percent2 = hotel.getPercentageOccupied();
-		expect(percent2).to.be.a('number');
-		expect(percent2).to.equal(12.5);
+		expect(percent2).to.be.a('string');
+		expect(percent2).to.equal('12.50');
 	});
 
 	it('should be able to search for customer by name', () => {

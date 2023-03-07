@@ -1,5 +1,5 @@
 import Booking from "./classes/Booking";
-import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo } from "./scripts";
+import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage } from "./scripts";
 // import Customer from "./classes/Customer";
 let apiCalls;
 
@@ -32,7 +32,6 @@ function getSingleUser(userID) {
     .catch(err => console.log(err))
 }
 
-
 function postNewBooking(booking, event, currentUser, room, convertedDate){
     return fetch('http://localhost:3001/api/v1/bookings', {
         method: 'POST',
@@ -58,4 +57,29 @@ function postNewBooking(booking, event, currentUser, room, convertedDate){
     .catch(err => alert(`Server Error: ${err}. Please try again later.`))
 }
 
-export { apiCalls, postNewBooking, getSingleUser }
+function deleteBooking(bookingID, currentUser) {
+    fetch(`http://localhost:3001/api/v1/bookings/${bookingID}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        if(data.message.includes('deleted')){
+            // const ghostBooking = overlookMotel.bookings.find((booking) => booking.id === bookingID)
+            //tomorrow figure out how to deal with the data not updated
+            serverMessage.innerText = "Booking successfully deleted"
+            displayUserSearchInfo(currentUser)
+        } else {
+            throw new Error('An unexpected problem has occurred')
+        }
+        return data;
+    })
+    .catch(err => alert(`Server Error: ${err}. Please try again later.`))
+}
+
+
+
+export { apiCalls, postNewBooking, getSingleUser, deleteBooking }

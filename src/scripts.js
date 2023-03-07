@@ -1,12 +1,6 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/motel-carpet.png';
-import { apiCalls, postNewBooking, getSingleUser } from './apiCalls';
+import { apiCalls, postNewBooking, getSingleUser, deleteBooking } from './apiCalls';
 import Customer from './classes/Customer';
 import Hotel from './classes/Hotel';
 import Booking from './classes/Booking';
@@ -40,6 +34,7 @@ const customerInfoSection = document.getElementById('customerInfo');
 const phantomMenance = document.getElementById('phantomMenace')
 
 const customerBookings = document.getElementById('customerBookingsInfo');
+const serverMessage = document.getElementById('serverMessage');
 
 
 let overlookMotel, currentUser, testUser;
@@ -71,7 +66,10 @@ searchUserButton.addEventListener('click', () => {
         currentUser = searchedUser;
     }
 });
-customerBookings.addEventListener('click', deleteBooking) //this is where we are 
+customerBookings.addEventListener('click', (event) => {
+    console.log(event.target.id)
+    deleteBooking(event.target.id, currentUser)
+}) 
 
 
 function logIn(event) {
@@ -79,10 +77,9 @@ function logIn(event) {
     if(username.value === 'manager' && password.value === 'overlook2021') {
         displayManagerView();
         currentUser = null;
-        console.log(currentUser)
     } else if(password.value === 'overlook2021' && username.value.length === 10) {
         const currentUserID = parseInt(username.value.slice(-2));
-    currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
+        currentUser = overlookMotel.customers.find(customer => customer.id === currentUserID);
         displayUserInfo(currentUser);
     } else if (password.value === 'overlook2021' && username.value.length === 9){
         const currentUserID = parseInt(username.value.slice(-1));
@@ -136,7 +133,6 @@ function filterForFuture(){
     date = parseInt(date)
     const filteredFuture = currentUser.bookings.filter(booking => {
         let bDate = parseInt(booking.date.split('/').join(''))
-        console.log(bDate, date)
         return bDate >= date
     });
 
@@ -149,7 +145,7 @@ function filterForFuture(){
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
         <p>Cost Per Night: $${booking.costPerNight}</p>
-        <button>Delete Booking</button>
+        <button id="${booking.id}">Delete Booking</button>
         </div>
         `
     })
@@ -166,8 +162,6 @@ function displayManagerView() {
     customerNameDisplay.innerText = 'manager'; 
     
     const date = new Date().toJSON().slice(0, 10).split('-').join('/');
-    console.log(new Date())
-    console.log('date', date) //why is this one day later
     totalRoomsToday.innerText = `${overlookMotel.getRoomsAvailableToday(date).length}`;
     totalRevenueToday.innerText = `$${overlookMotel.getRevenueToday()}`;
     percentOccupiedToday.innerText = `${overlookMotel.getPercentageOccupied()}%`;
@@ -238,4 +232,4 @@ function show(element){
     element.classList.remove('hidden');
 }
 
-export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo }
+export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage }
