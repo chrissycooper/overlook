@@ -78,6 +78,7 @@ customerBookings.addEventListener('click', (event) => {
 function logIn(event) {
     event.preventDefault();
     if(username.value === 'manager' && password.value === 'overlook2021') {
+        overlookMotel.managerMode = true;
         displayManagerView();
         currentUser = null;
     } else if(password.value === 'overlook2021' && username.value.length === 10) {
@@ -112,7 +113,7 @@ function displayUserInfo(user){
 }
 
 function displayUserSearchInfo(user){
-    searchedName.innerText = user.name
+    searchedName.innerText = user.name;
     customerInfoSection.innerHTML = `<h2 class="yourBookings">${user.name}'s History</h2>
     <p class='label'>Total Spent: $${user.calculateTotalSpent()}</p>
     <input type="checkbox" id="filterByDate" name="vehicle1" value="Bike">

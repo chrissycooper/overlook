@@ -39,8 +39,14 @@ function postNewBooking(booking, event, currentUser, room, convertedDate){
             overlookMotel.bookings.push(newBooking);
             hide(event.target.parentNode);
             currentUser.bookings.unshift(newBooking);
-            displayUserInfo(currentUser);
-            displayUserSearchInfo(currentUser)
+
+            overlookMotel.managerMode ? displayUserSearchInfo(currentUser) : displayUserInfo(currentUser)
+
+            serverMessage.innerText = "Booking successfully made"
+            setTimeout(() => {
+            serverMessage.innerText = ''
+            }, 1500)
+
         } else {
             throw new Error('An unexpected problem has occurred')
         }
@@ -65,20 +71,21 @@ function deleteBooking(bookingID, currentUser) {
                 if(booking.id === bookingID){
                     ghostIndex = index;
                 }
-                return booking.id === bookingID
+                return booking.id === bookingID;
             })
 
             currentUser.bookings.splice(ghostIndex, 1)
-            serverMessage.innerText = "Booking successfully deleted"
+            serverMessage.innerText = "Booking successfully deleted";
             setTimeout(() => {
-            serverMessage.innerText = ''
-            }, 1500)
-            displayUserSearchInfo(currentUser)
+            serverMessage.innerText = '';
+            }, 1500);
+
+            displayUserSearchInfo(currentUser);
 
         } else if(data.message.includes(bookingID)){
-            throw new Error('Booking has already been deleted, please refresh for most up to date information')
+            throw new Error('Booking has already been deleted, please refresh for most up to date information');
         } else {
-            throw new Error('An unexpected problem has occurred')
+            throw new Error('An unexpected problem has occurred');
         }
         return data;
     })

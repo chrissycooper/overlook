@@ -86,7 +86,7 @@ nav {
 
 
 .userBookingsSect{
-  width: 400px;
+  width: 500px;
   height: 70vh;
   display: flex;
   flex-wrap: wrap;
@@ -238,9 +238,6 @@ h1 {
   height: 200px;
   border-radius: 50%;
   background: darkblue;
-/*   opacity: 85%; */
-/*   z-index: 1; */
-/*   position: relative; */
 }
 
 .outside {
@@ -267,10 +264,9 @@ h1 {
   border-radius: 15px;
   height: 20vh;
   background-color: #f1f1f1;
-  /* gap: 1rem; */
   top: 50%;
   left: 40%;
-  box-shadow: 0px 0px 10px #03012C ;
+  box-shadow: 0px 0px 10px #03012C;
   font-size: 15pt;
 }
 

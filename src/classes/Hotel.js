@@ -7,6 +7,7 @@ class Hotel {
 		this.rooms = [];
 		this.bookings = [];
 		this.customers =[];
+		this.managerMode = false;
   }
 
 	parseHotelData(roomsData, bookingsData, customerData) {
