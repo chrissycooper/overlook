@@ -1,5 +1,5 @@
 import Booking from "./classes/Booking";
-import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage } from "./scripts";
+import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage, filterForFuture } from "./scripts";
 // import Customer from "./classes/Customer";
 let apiCalls;
 
@@ -68,10 +68,23 @@ function deleteBooking(bookingID, currentUser) {
     .then(data => {
         console.log(data);
         if(data.message.includes('deleted')){
-            // const ghostBooking = overlookMotel.bookings.find((booking) => booking.id === bookingID)
-            //tomorrow figure out how to deal with the data not updated
+            let ghostIndex;
+            const ghostBook = currentUser.bookings.find((booking, index )=> {
+                if(booking.id === bookingID){
+                    ghostIndex = index;
+                }
+                return booking.id === bookingID
+            })
+
+            currentUser.bookings.splice(ghostIndex, 1)
             serverMessage.innerText = "Booking successfully deleted"
+            setTimeout(() => {
+            serverMessage.innerText = ''
+            }, 1500)
             displayUserSearchInfo(currentUser)
+
+        } else if(data.message.includes(bookingID)){
+            throw new Error('Booking has already been deleted, please refresh for most up to date information')
         } else {
             throw new Error('An unexpected problem has occurred')
         }

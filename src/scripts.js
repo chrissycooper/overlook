@@ -67,8 +67,11 @@ searchUserButton.addEventListener('click', () => {
     }
 });
 customerBookings.addEventListener('click', (event) => {
-    console.log(event.target.id)
-    deleteBooking(event.target.id, currentUser)
+    console.log(event.target)
+    if(event.target.id){
+        console.log('hotdog')
+        deleteBooking(event.target.id, currentUser)
+    }
 }) 
 
 
@@ -145,7 +148,7 @@ function filterForFuture(){
         <p>Date: ${booking.date}</p>
         <p>Room Number: ${booking.roomNumber}</p>
         <p>Cost Per Night: $${booking.costPerNight}</p>
-        <button id="${booking.id}">Delete Booking</button>
+        <button data.name="delete-button" id="${booking.id}">Delete Booking</button>
         </div>
         `
     })
@@ -232,4 +235,4 @@ function show(element){
     element.classList.remove('hidden');
 }
 
-export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage }
+export { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage, filterForFuture }
