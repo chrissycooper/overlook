@@ -7,6 +7,7 @@ class Hotel {
 		this.rooms = [];
 		this.bookings = [];
 		this.customers =[];
+		this.managerMode = false;
   }
 
 	parseHotelData(roomsData, bookingsData, customerData) {
@@ -33,9 +34,32 @@ class Hotel {
 			return acc;
 		}, []);
 
-		return availableRooms.filter(room => room.type === roomType)
+		if(roomType) {
+			return availableRooms.filter(room => room.type === roomType)
+		} else {
+			return availableRooms
+		}
+
 	};
 
+	getRevenueToday(){
+		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+		const roomsBooked = this.bookings.filter(booking => booking.date === date).reduce((acc, booking) => {
+			return acc += booking.costPerNight
+		}, 0)
+
+		return roomsBooked.toFixed(2);
+	}
+
+	getPercentageOccupied() {
+		const date = new Date().toJSON().slice(0, 10).split('-').join('/');
+		const roomsBooked = this.bookings.filter(booking => booking.date === date);
+		return ((roomsBooked.length/this.rooms.length) * 100).toFixed(2)
+	};
+
+	searchUserByName(searchTerm) {
+		return this.customers.find(customer => customer.name === searchTerm)
+	}
 };
 
 export default Hotel;

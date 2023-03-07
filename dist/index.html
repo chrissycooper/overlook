@@ -12,10 +12,10 @@
 <body>
   <section class="error hidden" id="error-sect">
     <div class="modal" id="error-message">
-      <p id="error-message">uh, oh!</p>
+      <p id="error-message"></p>
     </div>
   </section>
-  <section class="login-page" id="login-page">
+  <section class="login-page " id="login-page">
     <section class="logo-section">
       <div class='outside'>
         <h1 class='overlook'>OVERLOOK</h1>
@@ -42,10 +42,11 @@
     <nav class="navbar">
       <h1 class="logo">Overlook Motel</h1>
       <h2 class="userName">Welcome, <h2 id="user-name" class="name"></h2></h2>
-      <h3 class="balance">Total Amount Spent: <p id="total-spent"></p></h3>
+      <h3 class="balance" id="balance">Total Amount Spent: <p id="total-spent"></p></h3>
+      <p id="serverMessage" class="label"></p>
     </nav>
     <main>
-      <section class="makeNewBooking userBookingsSect">
+      <section class="userBookingsSect" id="userBookingForm">
         <div class="form-wrapper">
           <h2>Plan Your Next Stay</h2>
           <h3>See Available Rooms by Date:</h3>
@@ -67,11 +68,39 @@
           <!-- available bookings here -->
         </section>
       </section>
-      <div class="wrapper">
+      <div class="wrapper" id="phantomMenace">
         <section class="userBookingsSect" id="userBookings">
           <!-- user booking history here -->
         </section>
       </div>
+      <!-- manager section below -->
+      <section class="managerView hidden" id="managerView" >
+        <section class="hotelInfo" id="hotelInfo">
+          <h3>Today's Metrics</h3>
+          <p class="label">Total Rooms Available: <p id="totalRoomsToday" class="label"></p></p>
+          <p class="label">Total Revenue: <p id="totalRevToday" class="label"></p></p>
+          <p class="label">Percent Rooms Occupied: <p id="percentOccupied" class="label"></p></p>
+        </section>
+        <div class="wrapper">
+          <section class="userBookingsSect" id="manageCustomers">
+            <div class="form-wrapper" id="customerSearch">
+              <form action="">
+                <h3>Search Customers</h3>
+                <label for="customerSearchInput" class="label">Enter customer name</label>
+                <input type="text" id="customerSearchInput">
+                <button id="customerSearchSubmit">submit</button>
+              </form>
+            </div>
+            <div id="customerInfoDisplay">
+              <p id="customerName"></p>
+              
+              <div id="customerInfo" class="customer-info">
+              </div>
+              <div id="customerBookingsInfo">
+
+              </div>
+            </div>
+          </section>
     </main>
   </div>
   <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
