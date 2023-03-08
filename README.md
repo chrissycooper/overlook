@@ -10,7 +10,7 @@ Overlook is a hotel booking site built from scratch in about 7 days using object
 ![a gif of the manager page](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjA5ZDZiYjYyZjdhOTkwMWEyZDA2MTY5YzQ4ZGRkYzNmZmY0YzVjNCZjdD1n/O8KebHFGJvxfG5F3OE/giphy.gif)
 
 
-## How to View Your Code in Action
+## How to View The Code in Action
 
 1. Fork and clone this repo, and [this backend API repo](https://github.com/turingschool-examples/overlook-api).
 
@@ -31,7 +31,7 @@ You will see a bunch of lines output to your terminal. In the first repo's tab, 
 Project is running at http://localhost:8080/
 ```
 
-Go to `http://localhost:8080/` in your browser to view the code running in the browser.
+5. Go to `http://localhost:8080/` in your browser to view the code running in the browser.
 
 ## contributors: 
 Chrissy Cooper [GitHub](https://github.com/chrissycooper) | | [LinkedIn](https://www.linkedin.com/in/christine-cooper-691196144/)
