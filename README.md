@@ -9,6 +9,8 @@ Overlook is a hotel booking site built from scratch in about 7 days using object
 
 ![a gif of the manager page](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjA5ZDZiYjYyZjdhOTkwMWEyZDA2MTY5YzQ4ZGRkYzNmZmY0YzVjNCZjdD1n/O8KebHFGJvxfG5F3OE/giphy.gif)
 
+Take a look at [this codepen](https://codepen.io/thecrimb/pen/JjaExOg) to peek at how I created the Overlook Motel logo
+
 
 ## How to View The Code in Action
 
