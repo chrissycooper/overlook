@@ -2,30 +2,26 @@ import Booking from "./classes/Booking";
 import { hide, overlookMotel, displayUserInfo, displayUserSearchInfo, serverMessage } from "./scripts";
 let apiCalls;
 
-const bookingsData = fetch("http://localhost:3001/api/v1/bookings")
+const bookingsData = fetch("https://overlook-api-jfogiato.vercel.app/api/v1/bookings")
     .then(response => response.json())
-    .then(data => data)
     .catch(err => console.log(err));
 
-const roomsData = fetch("http://localhost:3001/api/v1/rooms")
+const roomsData = fetch("https://overlook-api-jfogiato.vercel.app/api/v1/rooms")
     .then(response => response.json())
-    .then(data => data)
     .catch(err => console.log(err));
 
-const customersData = fetch("http://localhost:3001/api/v1/customers")
+const customersData = fetch("https://overlook-api-jfogiato.vercel.app/api/v1/customers")
     .then(response => response.json())
-    .then(data => data)
     .catch(err => console.log(err));
 
-const testCustomer = fetch("http://localhost:3001/api/v1/customers/6")
+const testCustomer = fetch("https://overlook-api-jfogiato.vercel.app/api/v1/customers/6")
     .then(response => response.json())
-    .then(data => data)
     .catch(err => console.log(err));
 
 apiCalls = [bookingsData, roomsData, customersData, testCustomer];
 
 function postNewBooking(booking, event, currentUser, room, convertedDate){
-    return fetch('http://localhost:3001/api/v1/bookings', {
+    return fetch('https://overlook-api-jfogiato.vercel.app/api/v1/bookings', {
         method: 'POST',
         body: JSON.stringify({ "userID": booking.userID, "date": booking.date, "roomNumber": booking.roomNumber }),
         headers: {
@@ -56,7 +52,7 @@ function postNewBooking(booking, event, currentUser, room, convertedDate){
 }
 
 function deleteBooking(bookingID, currentUser) {
-    fetch(`http://localhost:3001/api/v1/bookings/${bookingID}`, {
+    fetch(`https://overlook-api-jfogiato.vercel.app/api/v1/bookings/${bookingID}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -77,7 +73,7 @@ function deleteBooking(bookingID, currentUser) {
             currentUser.bookings.splice(ghostIndex, 1)
             serverMessage.innerText = "Booking successfully deleted";
             setTimeout(() => {
-            serverMessage.innerText = '';
+                serverMessage.innerText = '';
             }, 1500);
 
             displayUserSearchInfo(currentUser);
