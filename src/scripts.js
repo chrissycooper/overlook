@@ -56,7 +56,7 @@ availableRoomsDisplay.addEventListener('click', bookRoomForUser);
 loginButton.addEventListener('click', logIn);
 customerInfoSection.addEventListener('click', event => {
     if (event.target.type === "checkbox") {
-        event.target.checked ? filterForFuture() : displayUserSearchInfo(currentUser)
+        event.target.checked ? filterForFuture() : displayUserSearchInfo(currentUser);
     };
 })
 searchUserButton.addEventListener('click', () => {
@@ -64,14 +64,12 @@ searchUserButton.addEventListener('click', () => {
     if(searchedUser){
         displayUserSearchInfo(searchedUser);
         currentUser = searchedUser;
-        show(userBookingFormView)
+        show(userBookingFormView);
     }
 });
 customerBookings.addEventListener('click', (event) => {
-    console.log(event.target)
     if(event.target.id){
-        console.log('hotdog')
-        deleteBooking(event.target.id, currentUser)
+        deleteBooking(event.target.id, currentUser);
     }
 }) 
 
