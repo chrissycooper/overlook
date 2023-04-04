@@ -14,26 +14,16 @@ Take a look at [this codepen](https://codepen.io/thecrimb/pen/JjaExOg) to peek a
 
 ## How to View The Code in Action
 
-1. Fork and clone this repo, and [this backend API repo](https://github.com/turingschool-examples/overlook-api).
+Overlook is deployed on Github pages utilizing a Vercel hosted backend! 
 
-2. For both repos: install the library dependencies in separate tabs by
-running `npm install` on the command line. 
+To login as a customer: 
+ - username: customer plus any number between 1 and 50 -> e.g. customer28
+ - password: overlook2021
 
-3. Don't worry about any vulnerabilities it might want to fix. 
-
-4. To start In the terminal, for BOTH APIs run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. In the first repo's tab, one of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-5. Go to `http://localhost:8080/` in your browser to view the code running in the browser.
+To login as a manager:
+ - username: manager
+ - password: overlook2021
+                        
 
 ## contributors: 
 Chrissy Cooper [GitHub](https://github.com/chrissycooper) | | [LinkedIn](https://www.linkedin.com/in/christine-cooper-691196144/)
